@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::post('/insert-kandidat', 'KandidatController@insertKandidat');
 Route::post('/insert-education', 'KandidatController@insertEducation');
 Route::post('/insert-work-experience', 'KandidatController@insertWorkExperience');
+Route::post('/insert-job-applications', 'KandidatController@insert_job_applications');
 // Route::get('/test','testController@test');
 
 Auth::routes();

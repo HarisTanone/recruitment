@@ -55,4 +55,23 @@ class KandidatController extends Controller
 
         return response()->json(['message' => 'Data pengalaman kerja berhasil disimpan'], 201);
     }
+
+    public function insert_job_applications(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'job_id' => 'required|integer',
+            'kandidat_id' => 'required|integer',
+        ]);
+
+        // Simpan data ke tabel job_applications
+        DB::table('job_applications')->insert([
+            'job_id' => $request->job_id,
+            'kandidat_id' => $request->kandidat_id,
+            'application_date' => now(), // Atau sesuaikan dengan data input yang sesuai
+        ]);
+
+        return response()->json(['message' => 'Job application added successfully']);
+    }
+
 }
