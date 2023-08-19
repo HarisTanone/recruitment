@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'JobHomeController@index');
+Route::get('/load-more', 'JobHomeController@loadMore');
+Route::get('/search', 'JobHomeController@search')->name('search');
+Route::get('/get-job-detail/{jobID}', 'JobHomeController@getJobDetail')->name('get-job-detail');
+
 
 Route::post('/insert-kandidat', 'KandidatController@insertKandidat');
 Route::post('/insert-education', 'KandidatController@insertEducation');

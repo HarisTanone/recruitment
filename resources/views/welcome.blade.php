@@ -5,14 +5,16 @@
         <div class="container pt-4 mt-5">
             <div class="row text-center align-items-center">
                 <div class="col-md-4 col-lg-4">
-                    <img src="{{ asset('home/public/images/jonas-kakaroto-KIPqvvTOC1s-unsplash.png') }}" class="img-fluid d-none d-md-block"
-                        alt="..." data-aos="fade-in" />
+                    <img src="{{ asset('home/public/images/jonas-kakaroto-KIPqvvTOC1s-unsplash.png') }}"
+                        class="img-fluid d-none d-md-block" alt="..." data-aos="fade-in" />
                 </div>
                 <div class="col-md-4 col-lg-4" data-aos="fade-in">
                     <h1 class="mb-4 text-primary fw-bold">JOB VACANCY</h1>
-                    <input class="form-control form-control-lg" type="text" placeholder="Search"
-                        aria-label="default input example" />
-                    <button type="button" class="btn mt-2 mb-4 btn-primary">Search</button>
+                    <form action="{{ route('search') }}" method="GET">
+                        <input class="form-control form-control-lg" type="text" name="query" placeholder="Search"
+                            aria-label="default input example" />
+                        <button type="submit" class="btn mt-2 mb-4 btn-primary">Search</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -32,100 +34,58 @@
                 <div class="col-2 boreder-bottom"></div>
             </div>
             <div class="row mb-2 justify-content-center">
-                <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
-                    <div class="card d-flex flex-column h-100 border-0 shadow">
-                        <img src="{{ asset('home/public/images/j1.png') }}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5>Software Engineer</h5>
-                            <p class="fw-lighter fs-6">Information Technology, Software/Programming</p>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#detail-job"
-                                class="stretched-link"></a>
+                {{--  --}}
+                @if (isset($searchResults))
+                    @foreach ($searchResults as $job)
+                        <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
+                            <div class="card d-flex flex-column h-100 border-0 shadow" data-jobid="{{ $job->jobID }}">
+                                <?php $url = 'storage/' . $job->jobImage; ?>
+                                <img src="{{ asset($url) }}" class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <h5>{!! $job->jobtitle !!}</h5>
+                                    <p class="fw-lighter fs-6">{!! $job->jobdeskripsion !!}</p>
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#detail-job"
+                                        class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    @foreach ($jobs as $job)
+                        <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
+                            <div class="card d-flex flex-column h-100 border-0 shadow" data-jobid="{{ $job->jobID }}">
+                                <?php $url = 'storage/' . $job->jobImage; ?>
+                                <img src="{{ asset($url) }}" class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <h5>{!! $job->jobtitle !!}</h5>
+                                    <p class="fw-lighter fs-6">{!! $job->jobdeskripsion !!}</p>
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#detail-job"
+                                        class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+                {{--  --}}
+                <template id="job-template">
+                    <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
+                        <div class="card d-flex flex-column h-100 border-0 shadow mycart">
+                            <img src="" class="card-img-top" alt="..." />
+                            <div class="card-body">
+                                <h5></h5>
+                                <p class="fw-lighter fs-6"></p>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#detail-job"
+                                    class="stretched-link"></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
-                    <div class="card d-flex flex-column h-100 border-0 shadow">
-                        <img src="{{ asset('home/public/images/j2.png') }}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5>Registered Nurse</h5>
-                            <p class="fw-lighter fs-6">Healthcare</p>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#detail-job"
-                                class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
-                    <div class="card d-flex flex-column h-100 border-0 shadow">
-                        <img src="{{ asset('home/public/images/j3.png') }}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5>Financial Analyst</h5>
-                            <p class="fw-lighter fs-6">Finance</p>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#detail-job"
-                                class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
-                    <div class="card d-flex flex-column h-100 border-0 shadow">
-                        <img src="{{ asset('home/public/images/j4.png') }}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5>Web Developer</h5>
-                            <p class="fw-lighter fs-6">Information Technology</p>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#detail-job"
-                                class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-2 justify-content-center">
-                <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
-                    <div class="card d-flex flex-column h-100 border-0 shadow">
-                        <img src="{{ asset('home/public/images/j5.png') }}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5>Marketing Manager</h5>
-                            <p class="fw-lighter fs-6">Marketing</p>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#detail-job"
-                                class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
-                    <div class="card d-flex flex-column h-100 border-0 shadow">
-                        <img src="{{ asset('home/public/images/j6.png') }}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5>Graphic Designer</h5>
-                            <p class="fw-lighter fs-6">Design</p>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#detail-job"
-                                class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
-                    <div class="card d-flex flex-column h-100 border-0 shadow">
-                        <img src="{{ asset('home/public/images/j7.png') }}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5>Architecture</h5>
-                            <p class="fw-lighter fs-6">Architect</p>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#detail-job"
-                                class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
-                    <div class="card d-flex flex-column h-100 border-0 shadow">
-                        <img src="{{ asset('home/public/images/j8.png') }}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5>Content Writer</h5>
-                            <p class="fw-lighter fs-6">Writing</p>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#detail-job"
-                                class="stretched-link"></a>
-                        </div>
-                    </div>
-                </div>
+                </template>
             </div>
             <div class="row justify-content-center text-center" data-aos="zoom-in-down">
                 <div class="col-lg-4">
-                    <a class="btn btn-primary mt-2" href="#" role="button">Load More</a>
+                    <button id="loadMore" data-offset="8" class="btn btn-primary mt-2" href="#" role="button">Load
+                        More</button>
+                    {{-- <a class="btn btn-primary mt-2" href="#" role="button">Load More</a> --}}
                 </div>
             </div>
         </div>
@@ -133,35 +93,33 @@
     <!-- akhir section 2 // JOBS FIX-->
 
     <!-- Modal -->
-    <div class="modal" id="detail-job" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detail-jobLabel"
+    <div class="modal fade" id="detail-job" tabindex="-1" role="dialog" aria-labelledby="detail-jobLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header justify-content-center">
-                    <h5 class="modal-title" id="detail-jobLabel">Lorem, ipsum.</h5>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="job-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <h6>Job Description :</h6>
-                    <ol class="list-group list-group-numbered">
-                        <li class="list-group-item">Lorem ipsum dolor sit amet.</li>
-                    </ol>
-                    <h6>Job Requirements :</h6>
-                    <ol class="list-group list-group-numbered">
-                        <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo,
-                            autem!</li>
-                        <li class="list-group-item">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Reprehenderit non beatae facere ratione ullam nesciunt!.</li>
-                        <li class="list-group-item">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam
-                            harum libero reiciendis.</li>
-                    </ol>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Apply</button>
+                    <div class="card mb-3 border-0" style="width: 100%;">
+                        <img id="job-image" src="" class="card-img-top" alt="Job Image" />
+                        <div class="card-body">
+                            <h6>Deskripsi Pekerjaan:</h6>
+                            <p id="job-deskripsion" class="mb-3"></p>
+                            <h6>Persyaratan:</h6>
+                            <p id="job-reciure" class="mb-0"></p>
+                            <p class="card-text"><small class="text-muted" id="job-date-add"></small></p>
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary">Lamar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Akhir Modal  FIX -->
 
     <div class="custom-spacing"></div>
@@ -188,6 +146,70 @@
 @endsection
 @section('script')
     <script>
-        console.log('ok mantap')
+        var offset = 8; // Awal offset data yang akan diambil
+        var loadMoreButton = document.getElementById('loadMore');
+
+        loadMoreButton.addEventListener('click', function() {
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var jobs = JSON.parse(xhr.responseText);
+                        appendJobs(jobs);
+
+                        offset += jobs.length;
+                        if (jobs.length === 0) {
+                            loadMoreButton.style.display =
+                                'none'; // Sembunyikan tombol jika tidak ada data lagi
+                        }
+                    } else {
+                        console.error('Error loading more data');
+                    }
+                }
+            };
+
+            xhr.open('GET', '/load-more?offset=' + offset);
+            xhr.send();
+        });
+
+        function appendJobs(jobs) {
+            var jobTemplate = document.getElementById('job-template').content;
+            var jobContainer = document.querySelector('.row.mb-2.justify-content-center');
+
+            jobs.forEach(function(job) {
+                var clonedTemplate = document.importNode(jobTemplate, true);
+                clonedTemplate.querySelector('.card-img-top').src = "{{ asset('storage/') }}" + '/' + job.jobImage;
+                clonedTemplate.querySelector('h5').textContent = job.jobtitle;
+                clonedTemplate.querySelector('.fw-lighter.fs-6').textContent = job.jobdeskripsion;
+                clonedTemplate.querySelector('.mycart').setAttribute('data-jobid', job.jobID);
+                jobContainer.appendChild(clonedTemplate);
+            });
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            var modal = new bootstrap.Modal(document.getElementById('detail-job'));
+
+            function showJobDetails(jobID) {
+                $.get("/get-job-detail/" + jobID, function(data) {
+                    $('#job-image').attr('src', "{{ asset('storage/') }}/" + data.jobImage);
+                    $('#job-title').text(data.jobtitle);
+                    $('#job-spesialis').text(data.jobspesialis);
+                    $('#job-date-add').text("Tanggal Ditambahkan: " + data.jobDateAdd);
+                    $('#job-deskripsion').html(data.jobdeskripsion);
+                    $('#job-reciure').html(data.jobrecuire);
+
+                    modal.show();
+                }).fail(function() {
+                    alert('Job not found');
+                });
+            }
+
+            $('.row.mb-2.justify-content-center').on('click', '.card', function() {
+                var jobID = $(this).data('jobid');
+                showJobDetails(jobID);
+            });
+        });
     </script>
 @endsection
