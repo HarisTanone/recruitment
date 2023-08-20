@@ -11,6 +11,24 @@
     <!-- Akhir Custom CSS -->
     <!-- Animation -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            /*font-weight: bold;*/
+            font-family: 'Rubik', sans-serif;
+        }
+    </style>
     <!-- akhir animation -->
     <title>TalentFinder</title>
 </head>
@@ -19,7 +37,7 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#">TALENTFINDER</a>
+            <a class="navbar-brand" href="/">TALENTFINDER</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,41 +57,40 @@
     {{-- content --}}
     @yield('content')
     {{-- content --}}
-    {{-- footer --}}
     <!-- Footer -->
-    <footer class="mt-4 bg-primary text-white text-lg-start">
+    <footer class="mt-4 bg-primary text-white text-center text-lg-start">
         <!-- Grid container -->
-        <div class="container p-4">
+        <div class="container p-4 d-none d-md-block">
             <!--Grid row-->
             <div class="row">
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
                     <h5 class="text-uppercase">TALENTFINDER</h5>
-                    <p>TF.inc © 2023 Privacy - Terms</p>
+                    <p>TF.inc © 2023<br />Privacy — Terms</p>
                     <p></p>
                 </div>
                 <!--Grid column-->
 
                 <!--Grid column-->
-                <div class="col-lg-2 col-md-6 mb-4 mb-md-0 col-6">
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase">Home</h5>
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#!" class="text-white">About Us</a>
+                            <a href="pages/about-pages.html" class="text-white">About Us</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-white">FAQ</a>
+                            <a href="pages/faq-pages.html" class="text-white">FAQ</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-white">Contact</a>
+                            <a href="pages/contact-pages.html" class="text-white">Contact</a>
                         </li>
                     </ul>
                 </div>
                 <!--Grid column-->
 
                 <!--Grid column-->
-                <div class="col-lg-2 col-md-6 mb-4 mb-md-0 col-6">
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase mb-0">About Us</h5>
 
                     <ul class="list-unstyled">
@@ -96,7 +113,7 @@
 
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#!" class="text-white">Contact</a>
+                            <a href="pages/contact-pages.html" class="text-white">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -131,13 +148,13 @@
         </div>
         <!-- Copyright -->
     </footer>
-    <!-- Akhir Footer -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         AOS.init();
     </script>
+    <!-- Akhir Footer FIX -->
     @yield('script')
 </body>
 

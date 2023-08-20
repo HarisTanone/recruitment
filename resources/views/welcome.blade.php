@@ -35,7 +35,7 @@
             </div>
             <div class="row mb-2 justify-content-center">
                 {{--  --}}
-                @if (isset($searchResults))
+                @if (isset($searchResults) && count($searchResults) >= 1)
                     @foreach ($searchResults as $job)
                         <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
                             <div class="card d-flex flex-column h-100 border-0 shadow" data-jobid="{{ $job->jobID }}">
@@ -50,6 +50,10 @@
                             </div>
                         </div>
                     @endforeach
+                @elseif(isset($searchResults) && count($searchResults) == 0)
+                    <div class="alert alert-primary text-center" role="alert">
+                        No job search results found.
+                    </div>
                 @else
                     @foreach ($jobs as $job)
                         <div class="pb-4 col-lg-3" data-aos="zoom-in-down">
@@ -81,13 +85,14 @@
                     </div>
                 </template>
             </div>
-            <div class="row justify-content-center text-center" data-aos="zoom-in-down">
-                <div class="col-lg-4">
-                    <button id="loadMore" data-offset="8" class="btn btn-primary mt-2" href="#" role="button">Load
-                        More</button>
-                    {{-- <a class="btn btn-primary mt-2" href="#" role="button">Load More</a> --}}
+            @if ((count($jobs) >= 8 && !isset($searchResults)) || (isset($searchResults) && count($searchResults) >= 8))
+                <div class="row justify-content-center text-center" data-aos="zoom-in-down">
+                    <div class="col-lg-4">
+                        <button id="loadMore" data-offset="8" class="btn btn-primary mt-2" href="#"
+                            role="button">Load More</button>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </section>
     <!-- akhir section 2 // JOBS FIX-->
