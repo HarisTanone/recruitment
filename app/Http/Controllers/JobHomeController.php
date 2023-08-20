@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class JobHomeController extends Controller
 {
+    public function redirectToRoot()
+    {
+        return redirect('/');
+    }
+
     public function index()
     {
         $jobs = DB::table('jobs')->take(8)->get(); // Ambil 8 data pertama

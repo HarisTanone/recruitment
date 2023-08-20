@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/admin/dashboard'; // Change '/dashboard' to the desired URL
 
     /**
      * Create a new controller instance.

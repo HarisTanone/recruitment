@@ -20,7 +20,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        return view('admin.job.home');
+        return view('admin.job.index');
     }
 
     public function store(Request $request)
@@ -69,7 +69,6 @@ class JobController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         $job = DB::table('jobs')->where('jobID', $id)->first();
         if ($job) {
             // Validate the updated data (modify as needed)
@@ -78,7 +77,7 @@ class JobController extends Controller
                 'jobspesialis' => 'nullable|string|max:255',
                 'jobdeskripsion' => 'nullable|string',
                 'jobrecuire' => 'nullable|string',
-                'jobImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'jobImage' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             ]);
 
             if ($request->hasFile('jobImage')) {

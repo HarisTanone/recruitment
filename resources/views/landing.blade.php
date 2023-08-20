@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('home/assets/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('access_user/assets/main.css') }}" />
     <!-- Akhir Custom CSS -->
     <!-- Animation -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />

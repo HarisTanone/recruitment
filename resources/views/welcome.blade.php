@@ -5,7 +5,7 @@
         <div class="container pt-4 mt-5">
             <div class="row text-center align-items-center">
                 <div class="col-md-4 col-lg-4">
-                    <img src="{{ asset('home/public/images/jonas-kakaroto-KIPqvvTOC1s-unsplash.png') }}"
+                    <img src="{{ asset('access_user/public/images/jonas-kakaroto-KIPqvvTOC1s-unsplash.png') }}"
                         class="img-fluid d-none d-md-block" alt="..." data-aos="fade-in" />
                 </div>
                 <div class="col-md-4 col-lg-4" data-aos="fade-in">
@@ -140,7 +140,7 @@
                     <button type="button" class="btn btn-primary mb-5">Selengkapnya</button>
                 </div>
                 <div class="col-md-7 text-center" data-aos="fade-in">
-                    <img src="{{ asset('home/public/images/sec3.png') }}" class="img-fluid rounded mx-auto d-block mb-2"
+                    <img src="{{ asset('access_user/public/images/sec3.png') }}" class="img-fluid rounded mx-auto d-block mb-2"
                         alt="" />
                 </div>
             </div>
