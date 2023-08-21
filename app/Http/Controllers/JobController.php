@@ -30,7 +30,7 @@ class JobController extends Controller
             'jobspesialis' => 'nullable|string|max:255',
             'jobdeskripsion' => 'nullable|string',
             'jobrecuire' => 'nullable|string',
-            'jobImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'jobImage' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $job = $validatedData;
@@ -51,7 +51,10 @@ class JobController extends Controller
 
     public function getAll()
     {
-        $jobs = DB::table('jobs')->get();
+        $jobs = DB::table('jobs')
+            ->orderByDesc('jobID') // Mengurutkan berdasarkan jobID dari yang terbesar
+            ->get();
+
         return response()->json($jobs);
     }
 
@@ -88,7 +91,7 @@ class JobController extends Controller
 
                 // Upload and store the new image
                 $imagePath = $request->file('jobImage')->store('public/job_images');
-                $validatedData['jobImage'] = 'job_images/'.basename($imagePath);
+                $validatedData['jobImage'] = 'job_images/' . basename($imagePath);
             }
 
             // Create an array with the fields to update

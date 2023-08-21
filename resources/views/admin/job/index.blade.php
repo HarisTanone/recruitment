@@ -5,11 +5,23 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header ">
-                    <button class="btn btn-success" id="testbtn">Insert</button>
+                <div class="card-header d-flex justify-content-end">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search..."
+                            aria-label="Search..." aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="button" id="testbtn">Insert</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div id="jobList"></div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    {{-- <button class="btn btn-success" id="testbtn">Insert</button> --}}
+                    <ul class="pagination ml-auto" id="pagination">
+                        <!-- Navigasi pagination akan ditampilkan di sini -->
+                    </ul>
                 </div>
             </div>
         </div>
@@ -76,19 +88,19 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            // Function to fetch and display job data
-            function fetchJobData() {
-                $.ajax({
-                    url: '/admin/job/getAll',
-                    method: 'GET',
-                    success: function(response) {
-                        // Handle success
-                        console.log(response);
-                        var baseUrl = '{{ asset('') }}'; // Get the base URL of your application
-                        var jobListHtml = '<div class="row">';
-                        $.each(response, function(index, job) {
-                            // Create a job card using the provided template
-                            var cardHtml = ` <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
+            var itemsPerPage = 6; // Set the number of items per page
+            var totalJobs = 0;
+            var allJobs = []; // Semua data pekerjaan
+
+            function displayJobs(page, perPage) {
+                var startIndex = (page - 1) * perPage;
+                var endIndex = startIndex + perPage;
+                var jobListHtml = '';
+                var baseUrl = '{{ asset('') }}'; // Get the base URL of your application
+                var jobListHtml = '<div class="row">';
+                for (var i = startIndex; i < endIndex && i < totalJobs; i++) {
+                    var job = allJobs[i];
+                    var cardHtml = ` <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
                             <div class="card border-0 shadow d-flex flex-column h-100">
                                 <img class="card-img-top"
                                     src="${job.jobImage ? baseUrl + 'storage/' + job.jobImage : 'placeholder-image.jpg'}"
@@ -107,35 +119,64 @@
                                 </div>
                             </div>
                         </div>`;
+                    jobListHtml += cardHtml;
+                }
 
-                            jobListHtml += cardHtml;
-
-                            // Close row and start new row every 3 cards
-                            if ((index + 1) % 3 === 0) {
-                                jobListHtml += '</div><div class="row">';
-                            }
-                        });
-                        jobListHtml += '</div>';
-                        $('#jobList').html(jobListHtml);
-
-                        // Attach click event to job cards to show details in modal
-                        $('.myCart').click(function() {
-                            var modalId = $(this).data('target');
-                            $(modalId).modal('show');
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error
-                        var errorMessage = JSON.parse(xhr.responseText);
-                        console.error(errorMessage);
-                        alert('Error: ' + errorMessage.message);
-                        // You can handle the error and display a message to the user
-                    }
-                });
+                $('#jobList').html(jobListHtml);
+                updatePagination(page, Math.ceil(totalJobs / perPage));
             }
 
-            // Initial fetch and display
+            var originalAllJobs = []; // Store the original unfiltered data
+
+            function fetchJobData() {
+                $.getJSON("/admin/job/getAll",
+                    function(data) {
+                        originalAllJobs = data; // Store the original data
+                        allJobs = originalAllJobs; // Initialize allJobs with the original data
+                        totalJobs = allJobs.length;
+                        displayJobs(1, itemsPerPage);
+                    }
+                );
+            }
+
+            $('#searchInput').on('input', function() {
+                var query = $(this).val().toLowerCase();
+                if (query === '') {
+                    allJobs = fetchJobData(); // Reset allJobs to the original data
+                } else {
+                    allJobs = filterJobs(query); // Update allJobs with filtered results
+                }
+                displayJobs(1, itemsPerPage);
+            });
+
+            $('#pagination').on('click', '.page-link', function(e) {
+                e.preventDefault();
+                var page = $(this).data('page');
+                displayJobs(page, itemsPerPage);
+            });
+
+            function updatePagination(currentPage, totalPages) {
+                var paginationHtml = '';
+                for (var i = 1; i <= totalPages; i++) {
+                    paginationHtml += `<li class="page-item ${i === currentPage ? 'active' : ''}">
+                            <a class="page-link" href="#" data-page="${i}">${i}</a>
+                        </li>`;
+                }
+                $('#pagination').html(paginationHtml);
+            }
             fetchJobData();
+
+            function filterJobs(query) {
+                var filteredJobs = allJobs.filter(function(job) {
+                    return (
+                        job.jobtitle.toLowerCase().includes(query) ||
+                        job.jobspesialis.toLowerCase().includes(query) ||
+                        job.jobdeskripsion.toLowerCase().includes(query)
+                    );
+                });
+                totalJobs = filteredJobs.length;
+                return filteredJobs;
+            }
 
             $('#testbtn').click(function(e) {
                 e.preventDefault();
@@ -147,7 +188,8 @@
                 $('#jobtitle').val('');
                 $('#jobspesialis').val('');
                 $('#jobdeskripsion').val('');
-                $('#jobrecuire').val('');
+                // $('#jobrecuire').val('');
+                editor.setData('')
                 $('#jobImagePreview').attr('src', ''); // Clear image preview
                 $('#imagePreview').html(''); // Clear image preview element
             });
@@ -164,7 +206,9 @@
                         $('#jobtitle').val(data.jobtitle);
                         $('#jobspesialis').val(data.jobspesialis);
                         $('#jobdeskripsion').val(data.jobdeskripsion);
-                        $('#jobrecuire').val(data.jobrecuire);
+                        // $('#jobrecuire').val(data.jobrecuire);
+                        editor.setData(data.jobrecuire)
+                        // valueCKEditor = data.jobrecuire
                         if (data.jobImage) {
                             var imageUrl = "{{ asset('storage/') }}/" + data.jobImage;
                             $('#jobImagePreview').attr('src', imageUrl);
@@ -179,7 +223,8 @@
                 e.preventDefault(); // Prevent the default behavior of the link
 
                 var jobId = $(this).data('job-id');
-                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                var csrfToken = $('meta[name="csrf_token"]').attr('content');
+
                 swal({
                         title: "Are you sure?",
                         text: "Once deleted, you will not be able to recover this file!",
@@ -257,17 +302,26 @@
                         })
                         $('#exampleModal').modal('hide');
                         fetchJobData();
-                        // You can update your UI or perform other actions here
                     },
                     error: function(xhr, status, error) {
-                        // Handle error
                         var errorMessage = JSON.parse(xhr.responseText);
                         console.error(errorMessage);
                         alert('Error: ' + errorMessage.message);
-                        // You can handle the error and display a message to the user
                     }
                 });
             });
         });
+    </script>
+    <script>
+        let editor;
+
+        ClassicEditor
+            .create(document.querySelector('#jobrecuire'))
+            .then(newEditor => {
+                editor = newEditor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 @endsection

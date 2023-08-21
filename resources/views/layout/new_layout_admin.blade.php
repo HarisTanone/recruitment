@@ -231,6 +231,7 @@
     <script src="{{ url('admin_new/assets/dist/js/moment.min.js') }}"></script>
     <script src="{{ url('admin_new/assets/dist/js/datetime.js') }}"></script>
     <script src="{{ url('admin_new/assets/dist/js/ellipsis.js') }}"></script>
+    <script src="{{ url('admin_new/js/CKEDITOR.js') }}"></script>
 
     <!-- Page specific script -->
     @yield('script')
