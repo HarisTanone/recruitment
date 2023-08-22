@@ -1,7 +1,7 @@
 @extends('landing')
 @section('content')
     <!-- section-1 // hero -->
-    <div id="section" class="container-fluid">
+    <div id="section" class="container-fluid custom-section">
         <div class="container pt-4 mt-5">
             <div class="row text-center align-items-center">
                 <div class="col-md-4 col-lg-4">
@@ -24,7 +24,7 @@
     <div class="custom-spacing"></div>
 
     <!-- section 2 // JOBS -->
-    <section id="section" class="container-fluid">
+    <section id="sectionHero" class="container-fluid custom-section">
         <div class="container pt-4 pb-4">
             <div class="row justify-content-center pb-4">
                 <div class="col-md-12 text-center border-bottom" data-aos="fade-in">
