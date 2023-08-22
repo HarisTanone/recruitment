@@ -130,7 +130,7 @@
     <div class="custom-spacing"></div>
 
     <!-- section 3 -->
-    <section id="section" class="container-fluid">
+    <section id="section" class="container-fluid custom-section">
         <div class="container pt-4 pb-4">
             <div class="row align-items-center">
                 <div class="col-md-5">
