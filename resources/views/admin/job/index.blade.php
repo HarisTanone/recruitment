@@ -1,6 +1,6 @@
 @extends('layout.new_layout_admin')
 @section('title', 'Jobs Data')
-@section('menu', 'Menu')
+@section('menu', 'Jobs')
 @section('konten')
     <div class="row">
         <div class="col-12">
