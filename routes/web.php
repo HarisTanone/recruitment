@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'JobHomeController@index');
 Route::get('/faq/all', 'landingController@faq_index');
-Route::post('/concact-insert', 'landingController@store_contact');
+Route::post('/contact-insert', 'landingController@store_contact');
 Route::get('/load-more', 'JobHomeController@loadMore');
 Route::get('/search', 'JobHomeController@search')->name('search');
 Route::get('/get-job-detail/{jobID}', 'JobHomeController@getJobDetail')->name('get-job-detail');
@@ -46,11 +46,12 @@ Route::post('/admin/job/update/{id}', 'JobController@update');
 Route::get('/admin/job/{id}', 'JobController@getOne');
 
 // FAQ
-Route::get('/admin/faq', 'faqController@index');
+Route::get('/admin/faq', 'faqController@view');
+Route::get('/admin/faq/all', 'faqController@index');
 Route::post('/admin/faq/insert', 'faqController@store');
 Route::post('/admin/faq/update/{id}', 'faqController@update');
 Route::delete('/admin/faq/delete/{id}', 'faqController@destroy');
-Route::delete('/admin/faq/{id}', 'faqController@show');
+Route::get('/admin/faq/{id}', 'faqController@show');
 
 // contact us
 Route::get('/admin/contact-us', 'ContactUsController@index');

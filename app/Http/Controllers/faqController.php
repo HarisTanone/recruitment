@@ -13,6 +13,11 @@ class faqController extends Controller
         $this->middleware('auth');
     }
 
+    public function view()
+    {
+        return view('admin.faq.index');
+    }
+
     public function index()
     {
         $faqs = DB::table('faq')->get();

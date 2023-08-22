@@ -109,6 +109,10 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Lowongan</p>
                                     </a>
+                                    <a href="{{ url('admin/faq') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>FAQ</p>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
