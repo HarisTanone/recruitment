@@ -72,10 +72,10 @@
                             <a href="{{ url('about-us') }}" class="text-white">About Us</a>
                         </li>
                         <li>
-                            <a href="{{ url('contact-us') }}" class="text-white">FAQ</a>
+                            <a href="{{ url('faq') }}" class="text-white">FAQ</a>
                         </li>
                         <li>
-                            <a href="pages/contact-pages.html" class="text-white">Contact</a>
+                            <a href="{{ url('contact-us') }}" class="text-white">Contact</a>
                         </li>
                     </ul>
                 </div>
