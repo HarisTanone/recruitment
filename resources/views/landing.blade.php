@@ -35,9 +35,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="#">FAQ</a>
-                    <a class="nav-link" href="#">Contact Us</a>
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="{{ url('faq') }}">FAQ</a>
+                    <a class="nav-link" href="{{ url('contact-us') }}">Contact Us</a>
+                    <a class="nav-link" href="{{ url('about-us') }}">About Us</a>
                 </div>
             </div>
         </div>
