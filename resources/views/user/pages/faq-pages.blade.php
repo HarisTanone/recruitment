@@ -42,17 +42,17 @@
 @endsection
 @section('script')
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Menangani klik pada tombol searchButton
-        document.getElementById("searchButton").addEventListener("click", function() {
-            // Temukan elemen tujuan dengan ID sectionDUA
-            var sectionDUA = document.getElementById("sectionDUA");
-            if (sectionDUA) {
-                // Perpindahan scroll ke bagian tujuan
-                sectionDUA.scrollIntoView({ behavior: "smooth" });
-            }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Menangani klik pada tombol searchButton
+            document.getElementById("searchButton").addEventListener("click", function() {
+                // Temukan elemen tujuan dengan ID sectionDUA
+                var sectionDUA = document.getElementById("sectionDUA");
+                if (sectionDUA) {
+                    // Perpindahan scroll ke bagian tujuan
+                    sectionDUA.scrollIntoView({ behavior: "smooth" });
+                }
+            });
         });
-    });
     </script>
     <script>
         $(document).ready(function() {
