@@ -113,6 +113,10 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>FAQ</p>
                                     </a>
+                                    <a href="{{ url('admin/contact-us') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Contact</p>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -256,7 +260,8 @@
                         form.method = 'POST';
                         form.action = '{{ route('logout') }}';
                         form.style.display = 'none';
-                        var csrfToken = document.querySelector('meta[name="csrf_token"]').getAttribute('content');
+                        var csrfToken = document.querySelector('meta[name="csrf_token"]')
+                            .getAttribute('content');
                         var csrfField = document.createElement('input');
                         csrfField.setAttribute('type', 'hidden');
                         csrfField.setAttribute('name', '_token');

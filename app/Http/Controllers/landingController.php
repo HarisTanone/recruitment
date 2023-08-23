@@ -8,9 +8,22 @@ use Illuminate\Support\Facades\Validator;
 
 class landingController extends Controller
 {
+    public function faq_view()
+    {
+        return view('user/pages/faq-pages');
+    }
+    public function contact_view()
+    {
+        return view('user/pages/contact-pages');
+    }
+    public function about_view()
+    {
+        return view('user/pages/about-pages');
+    }
+
     public function faq_index()
     {
-        $faqs = DB::table('faq')->get();
+        $faqs = DB::table('faq')->where(['status' => 1])->get();
         return response()->json($faqs);
     }
 
