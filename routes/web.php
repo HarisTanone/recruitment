@@ -28,7 +28,9 @@ Route::post('/contact-insert', 'landingController@store_contact');
 Route::get('/load-more', 'JobHomeController@loadMore');
 Route::get('/search', 'JobHomeController@search')->name('search');
 Route::get('/get-job-detail/{jobID}', 'JobHomeController@getJobDetail')->name('get-job-detail');
-
+Route::get('/faq', 'landingController@faq_view');
+Route::get('/contact-us', 'landingController@contact_view');
+Route::get('/about-us', 'landingController@about_view');
 
 Route::post('/insert-kandidat', 'KandidatController@insertKandidat');
 Route::post('/insert-education', 'KandidatController@insertEducation');
@@ -54,22 +56,9 @@ Route::delete('/admin/faq/delete/{id}', 'faqController@destroy');
 Route::get('/admin/faq/{id}', 'faqController@show');
 
 // contact us
-Route::get('/admin/contact-us', 'ContactUsController@index');
+Route::get('/admin/contact-us', 'ContactUsController@view');
+Route::get('/admin/contact/all', 'ContactUsController@index');
 Route::post('/admin/contact-us', 'ContactUsController@store');
 Route::get('/admin/contact-us/{id}', 'ContactUsController@show');
 Route::delete('/admin/contact-us/{id}', 'ContactUsController@destroy');
 
-// FAQ View user
-Route::get('/faq', function(){
-    return view('user/pages/faq-pages');
-});
-
-// Contact View user
-Route::get('/contact-us', function(){
-    return view('user/pages/contact-pages');
-});
-
-// Contact View user
-Route::get('/about-us', function(){
-    return view('user/pages/about-pages');
-});

@@ -13,8 +13,13 @@ class ContactUsController extends Controller
         $this->middleware('auth');
     }
 
+    public function view()
+    {
+        return view('admin.contact.index');
+    }
+
     public function index()
-    { //test
+    {
         $contactUs = DB::table('contact_us')->get();
         return response()->json($contactUs);
     }
