@@ -14,7 +14,7 @@ class ContactUsController extends Controller
     }
 
     public function index()
-    {
+    { //test
         $contactUs = DB::table('contact_us')->get();
         return response()->json($contactUs);
     }
