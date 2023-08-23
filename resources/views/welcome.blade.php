@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-md-4 col-lg-4" data-aos="fade-in">
                     <h1 class="mb-4 text-primary fw-bold">JOB VACANCY</h1>
-                    <form action="{{ route('search') }}" method="GET">
+                    <form action="{{ route('search') }}#sectionJob" method="GET">
                         <input class="form-control form-control-lg" type="text" name="query" placeholder="Search"
                             aria-label="default input example" />
                         <button type="submit" class="btn mt-2 mb-4 btn-primary">Search</button>
@@ -24,7 +24,7 @@
     <div class="custom-spacing"></div>
 
     <!-- section 2 // JOBS -->
-    <section id="sectionHero" class="container-fluid custom-section">
+    <section id="sectionJob" class="container-fluid custom-section">
         <div class="container pt-4 pb-4">
             <div class="row justify-content-center pb-4">
                 <div class="col-md-12 text-center border-bottom" data-aos="fade-in">
@@ -150,6 +150,33 @@
     {{-- <div class="custom-spacing"></div> --}}
 @endsection
 @section('script')
+    <script>
+        // Function to handle hash URL scrolling
+        function scrollToHash() {
+            if (window.location.hash === "#sectionJob") {
+                var section = document.querySelector(window.location.hash);
+                if (section) {
+                    window.scrollTo(0, section.offsetTop);
+                }
+            }
+        }
+
+        // Scroll to hash on page load
+        window.addEventListener("load", scrollToHash);
+
+        // Scroll to hash when tautan with hash URL is clicked
+        document.addEventListener("click", function(event) {
+            if (event.target.tagName === "A" && event.target.hash === "#sectionJob") {
+                event.preventDefault();
+                var section = document.querySelector(event.target.hash);
+                if (section) {
+                    window.scrollTo({ top: section.offsetTop, behavior: "smooth" });
+                }
+            }
+        });
+    </script>
+
+
     <script>
         var offset = 8; // Awal offset data yang akan diambil
         var loadMoreButton = document.getElementById('loadMore');
