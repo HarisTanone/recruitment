@@ -3,7 +3,7 @@
 
     <div class="container-fluid custom-section">
       <div class="custom-spacing"></div>
-      <div id="section" class="container" style="height: 75vh">
+      <div id="section" class="container" style="height: 90vh">
         <div class="row justify-content-center text-center" data-aos="fade-up">
           <div class="col-4">
             <h1 class="mb-4 text-primary">CONTACT US</h1>
