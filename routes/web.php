@@ -32,6 +32,9 @@ Route::get('/faq', 'landingController@faq_view');
 Route::get('/contact-us', 'landingController@contact_view');
 Route::get('/about-us', 'landingController@about_view');
 
+Route::get('/apply', 'landingController@apply'); // Apply pages
+
+
 Route::post('/insert-kandidat', 'KandidatController@insertKandidat');
 Route::post('/insert-education', 'KandidatController@insertEducation');
 Route::post('/insert-work-experience', 'KandidatController@insertWorkExperience');

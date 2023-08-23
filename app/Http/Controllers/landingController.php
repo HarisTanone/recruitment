@@ -20,6 +20,10 @@ class landingController extends Controller
     {
         return view('user/pages/about-pages');
     }
+    public function apply()
+    {
+        return view('user/pages/apply-pages');
+    }
 
     public function faq_index()
     {

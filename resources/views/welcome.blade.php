@@ -116,7 +116,7 @@
                             <p id="job-reciure" class="mb-0"></p>
                             <p class="card-text"><small class="text-muted" id="job-date-add"></small></p>
                             <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary">Lamar</button>
+                                <a type="button" href="{{ url('apply') }}" class="btn btn-primary">Lamar</a> <!-- ambil judul sebagai url -->
                             </div>
                         </div>
                     </div>
