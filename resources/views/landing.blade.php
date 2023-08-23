@@ -9,28 +9,19 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('access_user/assets/main.css') }}" />
     <!-- Akhir Custom CSS -->
+
     <!-- Animation -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- akhir animation -->
+
+    <!-- new font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            /*font-weight: bold;*/
-            font-family: 'Rubik', sans-serif;
-        }
-    </style>
-    <!-- akhir animation -->
+    <!-- Akhir new font -->
+    
     <title>TalentFinder</title>
+
 </head>
 
 <body class="bg-primary text-primary">
@@ -44,9 +35,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="pages/faq-pages.html">FAQ</a>
-                    <a class="nav-link" href="#">Contact Us</a>
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="{{ url('faq') }}">FAQ</a>
+                    <a class="nav-link" href="{{ url('contact-us') }}">Contact Us</a>
+                    <a class="nav-link" href="{{ url('about-us') }}">About Us</a>
                 </div>
             </div>
         </div>
@@ -57,6 +48,7 @@
     {{-- content --}}
     @yield('content')
     {{-- content --}}
+    
     <!-- Footer -->
     <footer class="mt-4 bg-primary text-white text-center text-lg-start">
         <!-- Grid container -->
@@ -77,13 +69,13 @@
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="pages/about-pages.html" class="text-white">About Us</a>
+                            <a href="{{ url('about-us') }}" class="text-white">About Us</a>
                         </li>
                         <li>
-                            <a href="pages/faq-pages.html" class="text-white">FAQ</a>
+                            <a href="{{ url('faq') }}" class="text-white">FAQ</a>
                         </li>
                         <li>
-                            <a href="pages/contact-pages.html" class="text-white">Contact</a>
+                            <a href="{{ url('contact-us') }}" class="text-white">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -113,7 +105,7 @@
 
                     <ul class="list-unstyled">
                         <li>
-                            <a href="pages/contact-pages.html" class="text-white">Contact</a>
+                            <a href="{{ url('contact-us') }}" class="text-white">Contact</a>
                         </li>
                     </ul>
                 </div>

@@ -58,3 +58,18 @@ Route::get('/admin/contact-us', 'ContactUsController@index');
 Route::post('/admin/contact-us', 'ContactUsController@store');
 Route::get('/admin/contact-us/{id}', 'ContactUsController@show');
 Route::delete('/admin/contact-us/{id}', 'ContactUsController@destroy');
+
+// FAQ View user
+Route::get('/faq', function(){
+    return view('user/pages/faq-pages');
+});
+
+// Contact View user
+Route::get('/contact-us', function(){
+    return view('user/pages/contact-pages');
+});
+
+// Contact View user
+Route::get('/about-us', function(){
+    return view('user/pages/about-pages');
+});
