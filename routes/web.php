@@ -61,4 +61,5 @@ Route::get('/admin/contact/all', 'ContactUsController@index');
 Route::post('/admin/contact-us', 'ContactUsController@store');
 Route::get('/admin/contact-us/{id}', 'ContactUsController@show');
 Route::delete('/admin/contact-us/{id}', 'ContactUsController@destroy');
+Route::post('/admin/contact-us/send-email', 'ContactUsController@sendEmail');
 

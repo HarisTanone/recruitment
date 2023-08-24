@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class ContactUsController extends Controller
@@ -66,5 +68,30 @@ class ContactUsController extends Controller
         DB::table('contact_us')->where('id', $id)->delete();
 
         return response()->json(['message' => 'Contact message deleted']);
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|email',
+            'message' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $contactData = [
+            'firstname' => ucwords($request->input('firstname')),
+            'lastname' => ucwords($request->input('lastname')),
+            'email' => $request->input('email'),
+            'message' => ucwords($request->input('message')),
+        ];
+
+        Mail::to($request->input('email'))->send(new ContactMessage($contactData));
+
+        return response()->json(['message' => 'Contact message sent successfully']);
     }
 }

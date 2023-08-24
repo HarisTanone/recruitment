@@ -107,7 +107,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/job') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Lowongan</p>
+                                        <p>Jobs</p>
                                     </a>
                                     <a href="{{ url('admin/faq') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
