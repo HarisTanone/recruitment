@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::get('/', function () {
-//     return view('welcome');
+// Route::get('/test', function () {
+//     return redirect('/');
 // });
 // routes/web.php
 
@@ -37,7 +37,8 @@ Route::post('/insert-education', 'KandidatController@insertEducation');
 Route::post('/insert-work-experience', 'KandidatController@insertWorkExperience');
 Route::post('/insert-job-applications', 'KandidatController@insert_job_applications');
 
-Auth::routes();
+Auth::routes(['register' => false]);
+// Auth::routes();
 
 Route::get('/admin/dashboard', 'HomeController@index');
 Route::get('/admin/job', 'JobController@index');
