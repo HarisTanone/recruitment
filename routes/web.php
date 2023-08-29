@@ -36,6 +36,7 @@ Route::get('/apply', 'landingController@apply'); // Apply pages
 
 
 Route::post('/insert-kandidat', 'KandidatController@insertKandidat');
+Route::get('/cek-kandidat/{id}', 'KandidatController@checkIdCart');
 Route::post('/insert-education', 'KandidatController@insertEducation');
 Route::post('/insert-work-experience', 'KandidatController@insertWorkExperience');
 Route::post('/insert-job-applications', 'KandidatController@insert_job_applications');

@@ -18,13 +18,41 @@ class KandidatController extends Controller
             'email' => 'required|email',
             'alamat' => 'required',
             'agama' => 'required',
-            'bahasa_inggris' => 'required|in:Pemula,Menengah,Mahir',
+            'bahasa' => 'required',
             'extra_skill' => 'nullable',
         ]);
 
         DB::table('kandidat')->insert($data);
 
-        return response()->json(['message' => 'Data kandidat berhasil disimpan'], 201);
+        return response()->json(['message' => 'Data kandidat berhasil disimpan', 'uid' => base64_encode($request->id_cart)], 201);
+    }
+
+    public function checkIdCart($idCart)
+    {
+        $data = DB::table('kandidat')
+            ->select(
+                'kandidat.id_cart', 'kandidat.nama', 'kandidat.usia', 'kandidat.kelamin',
+                'kandidat.phone_number', 'kandidat.email', 'kandidat.alamat', 'kandidat.agama',
+                'kandidat.bahasa', 'kandidat.extra_skill',
+                'education.universitas', 'education.jurusan', 'education.ipk', 'education.lama_kuliah',
+                'work_experience.nama_perusahaan', 'work_experience.posisi', 'work_experience.lama_bekerja'
+            )
+            ->leftJoin('education', 'kandidat.id', '=', 'education.kandidat_id')
+            ->leftJoin('work_experience', 'kandidat.id', '=', 'work_experience.kandidat_id')
+            ->where('kandidat.id_cart', $idCart)
+            ->first();
+
+            // dd($data);
+        if (empty($idCart)) {
+            return response()->json(['message' => false], 200);
+        } else {
+            $existingKandidat = DB::table('kandidat')->where('id_cart', $idCart)->first();
+            if (isset($existingKandidat)) {
+                $existingEducation = DB::table('education')->where('kandidat_id', $existingKandidat->id)->first();
+                $existingExperience = DB::table('work_experience')->where('kandidat_id', $existingKandidat->id)->first();
+            }
+            return response()->json(['message' => !is_null($existingKandidat) ? true : false], 200);
+        }
     }
 
     public function insertEducation(Request $request)

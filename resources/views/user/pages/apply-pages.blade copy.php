@@ -14,8 +14,7 @@
                 <div class="col-md-4">
                     <ul class="nav d-none flex-column d-md-block">
                         <li class="nav-item">
-                            <a class="nav-link" href="#personalInfo1Card" id="navPersonalInfomation">Personal
-                                Information</a>
+                            <a class="nav-link" href="#personalInfo1Card">Personal Information</a>
                         </li>
                         <li class="nav-item">
                             <a id="naveducationCard" class="nav-link disabled" href="#educationCard">Last Education</a>
@@ -121,7 +120,7 @@
                     <div class="card bg-primary d-none" id="educationCard">
                         <div class="card-body">
                             <h5 class="card-title text-white">Last Education</h5>
-                            <form id="last-education">
+                            <form>
                                 <div class="mb-3">
                                     <select class="form-select" id="jenjang" name="jenjang">
                                         <option value="SD">SD</option>
@@ -147,7 +146,8 @@
                                 </div>
                                 <button type="button" class="btn btn-secondary float-start d-none d-sm-block d-md-none"
                                     onclick="">Back</button>
-                                <button type="button" class="btn btn-secondary float-end">Next</button>
+                                <button type="button" class="btn btn-secondary float-end"
+                                    onclick="showWorkExperience()">Next</button>
                             </form>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
                     <div class="card bg-primary d-none" id="workExperienceCard">
                         <div class="card-body">
                             <h5 class="card-title text-white">Work Experience</h5>
-                            <form id="workExperiences">
+                            <form>
                                 <div class="mb-3">
                                     <input type="text" class="form-control" id="namaPerusahaan" name="namaPerusahaan"
                                         placeholder="Nama Perusahaan" />
@@ -231,35 +231,16 @@
         }
 
         // Fungsi button next di personal card
-        function showPersonalInformation() {
-            hidePopOver();
-            document.getElementById("personalInfoCard").classList.remove("d-none");
-            document.getElementById("educationCard").classList.add("d-none");
-            document.getElementById("workExperienceCard").classList.add("d-none");
-            document.getElementById("finishCard").classList.add("d-none");
-            document.getElementById("navPersonalInfomation").classList.remove("disabled");
-            document.getElementById("naveducationCard").classList.add("disabled");
-            document.getElementById("navworkExperienceCard").classList.add("disabled");
-            document.getElementById("navfinishCard").classList.add("disabled");
-        }
-
-
         function showEducationCard() {
-            hidePopOver()
             document.getElementById("educationCard").classList.remove("d-none");
             document.getElementById("personalInfoCard").classList.add("d-none");
-            document.getElementById("navPersonalInfomation").classList.add("disabled");
             document.getElementById("naveducationCard").classList.remove("disabled");
         }
 
         // Fungsi button next di education
         function showWorkExperience() {
-            hidePopOver()
             document.getElementById("workExperienceCard").classList.remove("d-none");
             document.getElementById("educationCard").classList.add("d-none");
-            document.getElementById("personalInfoCard").classList.add("d-none");
-            document.getElementById("navPersonalInfomation").classList.add("disabled");
-            document.getElementById("naveducationCard").classList.add("disabled");
             document.getElementById("navworkExperienceCard").classList.remove("disabled");
         }
 
@@ -267,25 +248,11 @@
         function showFinish() {
             document.getElementById("finishCard").classList.remove("d-none");
             document.getElementById("workExperienceCard").classList.add("d-none");
-            document.getElementById("navworkExperienceCard").classList.add("disabled");
-            document.getElementById("navPersonalInfomation").classList.add("disabled");
-            document.getElementById("personalInfoCard").classList.add("d-none");
             document.getElementById("navfinishCard").classList.remove("disabled");
-        }
-
-        function hidePopOver() {
-            const popovers = document.querySelectorAll('[data-bs-toggle="popover"]');
-            popovers.forEach(popover => {
-                const bsPopover = bootstrap.Popover.getInstance(popover);
-                if (bsPopover) {
-                    bsPopover.hide();
-                }
-            });
         }
 
         // Fungsi button finish di card finish
 
-        // baru
         document.addEventListener("DOMContentLoaded", function() {
             var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
             var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
@@ -293,55 +260,52 @@
             });
         });
 
-        $(document).ready(function() {
-            $("#personal-information button[type='submit']").click(function(event) {
-                event.preventDefault();
-                const formData = $("#personal-information").serializeArray();
-                const personalInformation = {};
-                $.each(formData, function(index, field) {
-                    personalInformation[field.name] = field.value;
-                });
-                const personalInformationJSON = JSON.stringify(personalInformation);
-                localStorage.setItem("personalInformation", personalInformationJSON);
-                showEducationCard();
-            });
+        $('#id_cart').change(function(e) {
+            e.preventDefault();
+            // const id = localStorage.getItem('_uid')
+            const id = $('#id_cart').val()
+            $.getJSON("/cek-kandidat/" + id, function(data) {
+                $("#detailUser p.text-success").remove();
+                if (data.message === true) {
+                    $("#detailUser input").hide();
+                    $("#detailUser textarea").hide();
+                    $("#detailUser select").hide();
+                    $("#detailUser").append('<p class="text-success text-bg-primary text-center h4">Data is already available.</p>');
+                } else {
+                    $("#detailUser input").show();
+                    $("#detailUser textarea").show();
+                    $("#detailUser select").show();
+                    $("#detailUser p.text-success").remove();
 
-            $("#last-education button[type='button']").click(function() {
-                const formData = $("#last-education").serializeArray();
-                const lastEducation = {};
-                $.each(formData, function(index, field) {
-                    lastEducation[field.name] = field.value;
-                });
-                const lastEducationJSON = JSON.stringify(lastEducation);
-                localStorage.setItem("lastEducation", lastEducationJSON);
-                showWorkExperience();
+                }
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                $("#detailUser input").show();
+                $("#detailUser textarea").show();
+                $("#detailUser select").show();
+                $("#detailUser p.text-success").remove();
+                console.error("Error fetching data:", errorThrown);
             });
-            $("#workExperiences button[type='button']").click(function() {
-                const formData = $("#workExperiences").serializeArray();
-                const lastEducation = {};
-                $.each(formData, function(index, field) {
-                    lastEducation[field.name] = field.value;
+        });
+
+        $('#personal-information').submit(function(e) {
+            e.preventDefault();
+            swal({
+                    title: "Are you sure?",
+                    text: "Make suredata is correct",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.post("/insert-kandidat", $(this).serialize(),
+                            function(data) {
+                                localStorage.setItem('_uid', data.uid)
+                                console.log('kandidat data -> ', data);
+                                showEducationCard();
+                            }, "json");
+                    }
                 });
-                const lastEducationJSON = JSON.stringify(lastEducation);
-                localStorage.setItem("workExperience", lastEducationJSON);
-                showFinish();
-            });
-
-            // go to view ketika data belum tersedia di localstorage
-            const personalInformationJSON = localStorage.getItem("personalInformation");
-            const lastEducationJSON = localStorage.getItem("lastEducation");
-            const workExperienceJSON = localStorage.getItem("workExperience");
-
-            if (!personalInformationJSON) {
-                showPersonalInformation()
-            } else if (!lastEducationJSON) {
-                showEducationCard();
-            } else if (!workExperienceJSON) {
-                showWorkExperience();
-            } else if(personalInformationJSON && lastEducationJSON && workExperienceJSON){
-                console.log('ok -> ', personalInformationJSON && lastEducationJSON && workExperienceJSON)
-                showFinish();
-            }
         });
     </script>
 @endsection
