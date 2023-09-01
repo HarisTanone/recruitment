@@ -95,37 +95,6 @@
             @endif
         </div>
     </section>
-    <!-- akhir section 2 // JOBS FIX-->
-
-    <!-- Modal -->
-    <div class="modal fade" id="detail-job" tabindex="-1" role="dialog" aria-labelledby="detail-jobLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="job-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card mb-3 border-0" style="width: 100%;">
-                        <img id="job-image" src="" class="card-img-top" alt="Job Image" />
-                        <div class="card-body">
-                            <h6>Deskripsi Pekerjaan:</h6>
-                            <p id="job-deskripsion" class="mb-3"></p>
-                            <h6>Persyaratan:</h6>
-                            <p id="job-reciure" class="mb-0"></p>
-                            <p class="card-text"><small class="text-muted" id="job-date-add"></small></p>
-                            <div class="d-flex justify-content-end">
-                                <a type="button" href="{{ url('apply') }}" class="btn btn-primary">Lamar</a> <!-- ambil judul sebagai url -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Akhir Modal  FIX -->
 
     <div class="custom-spacing"></div>
 
@@ -140,8 +109,8 @@
                     <button type="button" class="btn btn-primary mb-5">Selengkapnya</button>
                 </div>
                 <div class="col-md-7 text-center" data-aos="fade-in">
-                    <img src="{{ asset('access_user/public/images/sec3.png') }}" class="img-fluid rounded mx-auto d-block mb-2"
-                        alt="" />
+                    <img src="{{ asset('access_user/public/images/sec3.png') }}"
+                        class="img-fluid rounded mx-auto d-block mb-2" alt="" />
                 </div>
             </div>
         </div>
@@ -170,7 +139,10 @@
                 event.preventDefault();
                 var section = document.querySelector(event.target.hash);
                 if (section) {
-                    window.scrollTo({ top: section.offsetTop, behavior: "smooth" });
+                    window.scrollTo({
+                        top: section.offsetTop,
+                        behavior: "smooth"
+                    });
                 }
             }
         });
@@ -221,26 +193,9 @@
     </script>
     <script>
         $(document).ready(function() {
-            var modal = new bootstrap.Modal(document.getElementById('detail-job'));
-
-            function showJobDetails(jobID) {
-                $.get("/get-job-detail/" + jobID, function(data) {
-                    $('#job-image').attr('src', "{{ asset('storage/') }}/" + data.jobImage);
-                    $('#job-title').text(data.jobtitle);
-                    $('#job-spesialis').text(data.jobspesialis);
-                    $('#job-date-add').text("Tanggal Ditambahkan: " + data.jobDateAdd);
-                    $('#job-deskripsion').html(data.jobdeskripsion);
-                    $('#job-reciure').html(data.jobrecuire);
-
-                    modal.show();
-                }).fail(function() {
-                    alert('Job not found');
-                });
-            }
-
             $('.row.mb-2.justify-content-center').on('click', '.card', function() {
                 var jobID = $(this).data('jobid');
-                showJobDetails(jobID);
+                window.location.href = "/apply/" + jobID;
             });
         });
     </script>

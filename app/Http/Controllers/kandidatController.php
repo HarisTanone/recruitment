@@ -42,7 +42,7 @@ class KandidatController extends Controller
             ->where('kandidat.id_cart', $idCart)
             ->first();
 
-            // dd($data);
+        // dd($data);
         if (empty($idCart)) {
             return response()->json(['message' => false], 200);
         } else {
@@ -86,20 +86,36 @@ class KandidatController extends Controller
 
     public function insert_job_applications(Request $request)
     {
-        // Validasi input
-        $request->validate([
-            'job_id' => 'required|integer',
-            'kandidat_id' => 'required|integer',
-        ]);
+        try {
+            // Validasi input
+            $request->validate([
+                'job_id' => 'required|integer',
+                'kandidat_id' => 'required|integer|unique:job_applications,kandidat_id,NULL,id,job_id,' . $request->job_id,
+            ], [
+                'kandidat_id.unique' => 'You has already applied for this job.',
+            ]);
 
-        // Simpan data ke tabel job_applications
-        DB::table('job_applications')->insert([
-            'job_id' => $request->job_id,
-            'kandidat_id' => $request->kandidat_id,
-            'application_date' => now(), // Atau sesuaikan dengan data input yang sesuai
-        ]);
+            // Cek apakah sudah ada entri dengan kombinasi job_id dan kandidat_id
+            $existingApplication = DB::table('job_applications')
+                ->where('job_id', $request->job_id)
+                ->where('kandidat_id', $request->kandidat_id)
+                ->first();
 
-        return response()->json(['message' => 'Job application added successfully']);
+            if ($existingApplication) {
+                return response()->json(['success' => false, 'message' => 'You has already applied for this job.']);
+            }
+
+            // Simpan data ke tabel job_applications
+            DB::table('job_applications')->insert([
+                'job_id' => $request->job_id,
+                'kandidat_id' => $request->kandidat_id,
+                'application_date' => now(),
+            ]);
+
+            return response()->json(['success' => true, 'message' => 'Job application added successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'An error occurred while processing the application']);
+        }
     }
 
 }
