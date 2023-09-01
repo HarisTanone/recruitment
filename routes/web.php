@@ -31,8 +31,15 @@ Route::get('/get-job-detail/{jobID}', 'JobHomeController@getJobDetail')->name('g
 Route::get('/faq', 'landingController@faq_view');
 Route::get('/contact-us', 'landingController@contact_view');
 Route::get('/about-us', 'landingController@about_view');
+Route::post('/apply/save', 'landingController@storeData');
+Route::get('/apply/{id}', 'landingController@applyView');
+
+Route::get('/apply', 'landingController@apply'); // Apply pages
+Route::get('/cek/{id}', 'landingController@cekIDCart'); // Apply pages
+
 
 Route::post('/insert-kandidat', 'KandidatController@insertKandidat');
+Route::get('/cek-kandidat/{id}', 'KandidatController@checkIdCart');
 Route::post('/insert-education', 'KandidatController@insertEducation');
 Route::post('/insert-work-experience', 'KandidatController@insertWorkExperience');
 Route::post('/insert-job-applications', 'KandidatController@insert_job_applications');

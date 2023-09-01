@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-md-4 col-lg-4" data-aos="fade-in">
                     <h1 class="mb-4 text-primary fw-bold">JOB VACANCY</h1>
-                    <form action="{{ route('search') }}" method="GET">
+                    <form action="{{ route('search') }}#sectionJob" method="GET">
                         <input class="form-control form-control-lg" type="text" name="query" placeholder="Search"
                             aria-label="default input example" />
                         <button type="submit" class="btn mt-2 mb-4 btn-primary">Search</button>
@@ -24,7 +24,7 @@
     <div class="custom-spacing"></div>
 
     <!-- section 2 // JOBS -->
-    <section id="sectionHero" class="container-fluid custom-section">
+    <section id="sectionJob" class="container-fluid custom-section">
         <div class="container pt-4 pb-4">
             <div class="row justify-content-center pb-4">
                 <div class="col-md-12 text-center border-bottom" data-aos="fade-in">
@@ -95,37 +95,6 @@
             @endif
         </div>
     </section>
-    <!-- akhir section 2 // JOBS FIX-->
-
-    <!-- Modal -->
-    <div class="modal fade" id="detail-job" tabindex="-1" role="dialog" aria-labelledby="detail-jobLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="job-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card mb-3 border-0" style="width: 100%;">
-                        <img id="job-image" src="" class="card-img-top" alt="Job Image" />
-                        <div class="card-body">
-                            <h6>Deskripsi Pekerjaan:</h6>
-                            <p id="job-deskripsion" class="mb-3"></p>
-                            <h6>Persyaratan:</h6>
-                            <p id="job-reciure" class="mb-0"></p>
-                            <p class="card-text"><small class="text-muted" id="job-date-add"></small></p>
-                            <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary">Lamar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Akhir Modal  FIX -->
 
     <div class="custom-spacing"></div>
 
@@ -140,8 +109,8 @@
                     <button type="button" class="btn btn-primary mb-5">Selengkapnya</button>
                 </div>
                 <div class="col-md-7 text-center" data-aos="fade-in">
-                    <img src="{{ asset('access_user/public/images/sec3.png') }}" class="img-fluid rounded mx-auto d-block mb-2"
-                        alt="" />
+                    <img src="{{ asset('access_user/public/images/sec3.png') }}"
+                        class="img-fluid rounded mx-auto d-block mb-2" alt="" />
                 </div>
             </div>
         </div>
@@ -150,6 +119,36 @@
     {{-- <div class="custom-spacing"></div> --}}
 @endsection
 @section('script')
+    <script>
+        // Function to handle hash URL scrolling
+        function scrollToHash() {
+            if (window.location.hash === "#sectionJob") {
+                var section = document.querySelector(window.location.hash);
+                if (section) {
+                    window.scrollTo(0, section.offsetTop);
+                }
+            }
+        }
+
+        // Scroll to hash on page load
+        window.addEventListener("load", scrollToHash);
+
+        // Scroll to hash when tautan with hash URL is clicked
+        document.addEventListener("click", function(event) {
+            if (event.target.tagName === "A" && event.target.hash === "#sectionJob") {
+                event.preventDefault();
+                var section = document.querySelector(event.target.hash);
+                if (section) {
+                    window.scrollTo({
+                        top: section.offsetTop,
+                        behavior: "smooth"
+                    });
+                }
+            }
+        });
+    </script>
+
+
     <script>
         var offset = 8; // Awal offset data yang akan diambil
         var loadMoreButton = document.getElementById('loadMore');
@@ -194,26 +193,9 @@
     </script>
     <script>
         $(document).ready(function() {
-            var modal = new bootstrap.Modal(document.getElementById('detail-job'));
-
-            function showJobDetails(jobID) {
-                $.get("/get-job-detail/" + jobID, function(data) {
-                    $('#job-image').attr('src', "{{ asset('storage/') }}/" + data.jobImage);
-                    $('#job-title').text(data.jobtitle);
-                    $('#job-spesialis').text(data.jobspesialis);
-                    $('#job-date-add').text("Tanggal Ditambahkan: " + data.jobDateAdd);
-                    $('#job-deskripsion').html(data.jobdeskripsion);
-                    $('#job-reciure').html(data.jobrecuire);
-
-                    modal.show();
-                }).fail(function() {
-                    alert('Job not found');
-                });
-            }
-
             $('.row.mb-2.justify-content-center').on('click', '.card', function() {
                 var jobID = $(this).data('jobid');
-                showJobDetails(jobID);
+                window.location.href = "/apply/" + jobID;
             });
         });
     </script>
