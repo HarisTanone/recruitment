@@ -63,7 +63,51 @@
                         </div>
                         <div class="form-group">
                             <label for="jobrecuire">Job Requirements</label>
-                            <textarea name="jobrecuire" id="jobrecuire" cols="30" rows="10" class="form-control"></textarea>
+                            {{-- <textarea name="jobrecuire" id="jobrecuire" cols="30" rows="10" class="form-control"></textarea> --}}
+                            <div class="row">
+                                <div class="co-lg-6 col-md-6 col-sm 6">
+                                    <select class="form-control" name="last_pendidikan" id="last_pendidikan">
+                                        <option value="">Last Education</option>
+                                        <option value="SMA">SMA</option>
+                                        <option value="D3">D3</option>
+                                        <option value="S1">S1</option>
+                                        <option value="S2">S2</option>
+                                        <option value="S3">S3</option>
+                                    </select>
+                                </div>
+                                <div class="co-lg-6 col-md-6 col-sm 6">
+                                    <select class="form-control" name="gender" id="gender">
+                                        <option value="">Gender</option>
+                                        <option value="pria">Pria</option>
+                                        <option value="wanita">Wanita</option>
+                                    </select>
+                                </div>
+                                <div class="co-lg-6 col-md-6 col-sm 6 pt-4">
+                                    <input type="number" name="umur" id="umur" class="form-control"
+                                        placeholder="Umur 25">
+                                </div>
+                                <div class="co-lg-6 col-md-6 col-sm 6 pt-4">
+                                    <input type="number" name="ipk" id="ipk" class="form-control"
+                                        placeholder="IPK 3.9">
+                                </div>
+                                <div class="co-lg-6 col-md-6 col-sm 6 pt-4">
+                                    <select class="form-control" name="min_pengalaman" id="min_pengalaman">
+                                        <option value="">Lama Pengalaman</option>
+                                        <option value="0">Fresh Grad</option>
+                                        <option value="1">1 Thn</option>
+                                        <option value="2">2 Thn</option>
+                                        <option value="3">3 Thn</option>
+                                        <option value="4">4 Thn</option>
+                                        <option value="6">6 Thn</option>
+                                        <option value="9"> > 6 Thn</option>
+                                    </select>
+                                </div>
+
+                                <div class="co-lg-6 col-md-6 col-sm 6 pt-4">
+                                    <select class="form-control" name="jurusan" id="jurusan">
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="jobImage">Image</label>
@@ -88,6 +132,16 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            var mySelect2 = $('#jurusan');
+            $.getJSON('/getJurusan', function(data) {
+                mySelect2.empty();
+                $.each(data, function(key, value) {
+                    mySelect2.append($('<option>').text(value.nama).attr('value', value.nilai));
+                });
+                mySelect2.attr('data-placeholder', 'Jurusan');
+                mySelect2.select2({ dropdownParent: "#exampleModal" });
+            });
+
             var itemsPerPage = 6; // Set the number of items per page
             var totalJobs = 0;
             var allJobs = []; // Semua data pekerjaan
@@ -100,6 +154,8 @@
                 var jobListHtml = '<div class="row">';
                 for (var i = startIndex; i < endIndex && i < totalJobs; i++) {
                     var job = allJobs[i];
+                    console.log('job.jobRequirements -> ', job.jobRequirements)
+                    const JData = JSON.parse(job.jobRequirements)
                     var cardHtml = ` <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
                             <div class="card border-0 shadow d-flex flex-column h-100">
                                 <img class="card-img-top"
@@ -108,6 +164,16 @@
                                 <div class="card-body">
                                     <h4 class="card-title">${job.jobtitle}</h4>
                                     <p class="card-text">${job.jobdeskripsion.substring(0, 60)}</p>
+                                    ${JData !== null ? `
+                                        <span class="small text-bold text-muted">Requirements</span>
+                                        <p>
+                                            <span class="badge bg-secondary">${JData.last_pendidikan}</span>
+                                            <span class="badge bg-secondary">${JData.gender}</span>
+                                            <span class="badge bg-secondary">${JData.umur} Tahun</span>
+                                            <span class="badge bg-secondary">IPK ${JData.ipk}</span>
+                                            <span class="badge bg-secondary">${JData.jurusan}</span>
+                                            <span class="badge bg-secondary">Pengalaman ${JData.min_pengalaman} Tahun</span>
+                                        </p>` : ''}
                                 </div>
                                 <div class="card-footer text-lg-right">
                                     <button class="btn btn-danger btn-sm delete-job" data-job-id="${job.jobID}">
@@ -188,6 +254,14 @@
                 $('#jobtitle').val('');
                 $('#jobspesialis').val('');
                 $('#jobdeskripsion').val('');
+                $("#last_pendidikan").val('')
+                $("#gender").val('')
+                $("#umur").val('')
+                $("#ipk").val('')
+                $("#min_pengalaman").val('')
+                // $("#jurusan").val('')
+                $("#jurusan").select2("val", '');
+
                 // $('#jobrecuire').val('');
                 editor.setData('')
                 $('#jobImagePreview').attr('src', ''); // Clear image preview
@@ -203,11 +277,19 @@
                 $('#myModalTitle').text('Update Job')
                 $.getJSON("/admin/job/" + jobId,
                     function(data, textStatus, jqXHR) {
+                        const details = JSON.parse(data.jobRequirements)
                         $('#jobtitle').val(data.jobtitle);
                         $('#jobspesialis').val(data.jobspesialis);
                         $('#jobdeskripsion').val(data.jobdeskripsion);
+                        $("#last_pendidikan").val(details.last_pendidikan)
+                        $("#gender").val(details.gender)
+                        $("#umur").val(details.umur)
+                        $("#ipk").val(details.ipk)
+                        $("#min_pengalaman").val(details.min_pengalaman)
+                        // $("#jurusan").val(details.jurusan)
+                        $("#jurusan").select2("val", details.jurusan);
                         // $('#jobrecuire').val(data.jobrecuire);
-                        editor.setData(data.jobrecuire)
+                        // editor.setData(data.jobrecuire)
                         // valueCKEditor = data.jobrecuire
                         if (data.jobImage) {
                             var imageUrl = "{{ asset('storage/') }}/" + data.jobImage;
@@ -312,7 +394,7 @@
             });
         });
     </script>
-    <script>
+    {{-- <script>
         let editor;
 
         ClassicEditor
@@ -323,5 +405,5 @@
             .catch(error => {
                 console.error(error);
             });
-    </script>
+    </script> --}}
 @endsection

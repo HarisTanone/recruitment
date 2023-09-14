@@ -33,7 +33,7 @@ Route::get('/contact-us', 'landingController@contact_view');
 Route::get('/about-us', 'landingController@about_view');
 Route::post('/apply/save', 'landingController@storeData');
 Route::get('/apply/{id}', 'landingController@applyView');
-
+Route::get('/getJurusan', 'landingController@getJurusan');
 Route::get('/apply', 'landingController@apply'); // Apply pages
 Route::get('/cek/{id}', 'landingController@cekIDCart'); // Apply pages
 

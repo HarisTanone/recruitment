@@ -135,4 +135,9 @@ class landingController extends Controller
             return response()->json(['message' => 'Data Not Found', 'status' => 400]);
         }
     }
+
+    public function getJurusan(Request $request){
+        $jurusan = DB::table('jurusan')->get();
+        return response()->json($jurusan);
+    }
 }
