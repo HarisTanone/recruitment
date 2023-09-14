@@ -23,6 +23,11 @@
         href="{{ url('admin_new/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ url('admin_new/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ url('admin_new/css/select2-bootstrap.css') }}">
+    <style>
+        .select2-container .select2-selection--single {
+            height: 38px !important;
+        }
+    </style>
     <meta name="csrf_token" content="{{ csrf_token() }}" id="token" />
 
 </head>
@@ -88,7 +93,8 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{ url('admin/dashboard') }}" class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}">
+                            <a href="{{ url('admin/dashboard') }}"
+                                class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard

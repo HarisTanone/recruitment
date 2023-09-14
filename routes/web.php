@@ -31,6 +31,7 @@ Route::get('/get-job-detail/{jobID}', 'JobHomeController@getJobDetail')->name('g
 Route::get('/faq', 'landingController@faq_view');
 Route::get('/contact-us', 'landingController@contact_view');
 Route::get('/about-us', 'landingController@about_view');
+Route::get('/getJurusan', 'landingController@getJurusan');
 
 Route::post('/insert-kandidat', 'KandidatController@insertKandidat');
 Route::post('/insert-education', 'KandidatController@insertEducation');

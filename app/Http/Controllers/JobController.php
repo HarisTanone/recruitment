@@ -25,16 +25,25 @@ class JobController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $validatedData = $request->validate([
             'jobtitle' => 'required|string|max:255',
             'jobspesialis' => 'nullable|string|max:255',
             'jobdeskripsion' => 'nullable|string',
-            'jobrecuire' => 'nullable|string',
             'jobImage' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+        ]);
+        $json = json_encode([
+            "last_pendidikan" => $request->last_pendidikan,
+            "gender" => $request->gender,
+            "umur" => $request->umur,
+            "ipk" => $request->ipk,
+            "min_pengalaman" => $request->min_pengalaman,
+            "jurusan" => $request->jurusan
         ]);
 
         $job = $validatedData;
         $job['jobDateAdd'] = now();
+        $job['jobRequirements'] = $json;
 
         $jobId = DB::table('jobs')->insertGetId($job);
         $newJob = DB::table('jobs')->where('jobID', $jobId)->first();
@@ -79,7 +88,6 @@ class JobController extends Controller
                 'jobtitle' => 'required|string|max:255',
                 'jobspesialis' => 'nullable|string|max:255',
                 'jobdeskripsion' => 'nullable|string',
-                'jobrecuire' => 'nullable|string',
                 'jobImage' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             ]);
 
@@ -93,13 +101,20 @@ class JobController extends Controller
                 $imagePath = $request->file('jobImage')->store('public/job_images');
                 $validatedData['jobImage'] = 'job_images/' . basename($imagePath);
             }
-
+            $json = json_encode([
+                "last_pendidikan" => $request->last_pendidikan,
+                "gender" => $request->gender,
+                "umur" => $request->umur,
+                "ipk" => $request->ipk,
+                "min_pengalaman" => $request->min_pengalaman,
+                "jurusan" => $request->jurusan
+            ]);
             // Create an array with the fields to update
             $updateData = [
                 'jobtitle' => $validatedData['jobtitle'],
                 'jobspesialis' => $validatedData['jobspesialis'],
                 'jobdeskripsion' => $validatedData['jobdeskripsion'],
-                'jobrecuire' => $validatedData['jobrecuire'],
+                'jobRequirements' => $json
             ];
 
             // Add jobImage if it exists in the validated data

@@ -49,4 +49,10 @@ class landingController extends Controller
 
         return response()->json(['message' => 'Contact message created successfully', 'data' => $contactUs]);
     }
+
+    public function getJurusan(Request $request){
+        $jurusan = DB::table('jurusan')->get();
+        return response()->json($jurusan);
+    }
+
 }
