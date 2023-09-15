@@ -208,8 +208,8 @@
                                                     name="universitas" placeholder="Universitas" />
                                             </div>
                                             <div class="mb-3 col-lg-6 col-md-12 col-sm-12">
-                                                <input required type="text" class="form-control" id="jurusan"
-                                                    name="jurusan" placeholder="Jurusan" />
+                                                <select class="form-select" id="jurusan" name="jurusan" required>
+                                                </select>
                                             </div>
                                             <div class="mb-3 col-lg-4 col-md-4 -col-sm-4">
                                                 <input required type="number" class="form-control" id="tahunMasuk"
@@ -335,11 +335,23 @@
 @endsection
 @section('script')
     <script>
+        var mySelect2 = $('#jurusan');
+        $.getJSON('/getJurusan', function(data) {
+            mySelect2.empty();
+            $.each(data, function(key, value) {
+                mySelect2.append($('<option>').text(value.nama).attr('value', value.nilai));
+            });
+            mySelect2.attr('data-placeholder', 'Jurusan');
+            mySelect2.select2({
+                placeholder: 'Jurusan',
+                allowClear: true,
+            });
+        });
         // cek jika sudah ada user id maka langsung redirect ke home page untuk apply job
         if (localStorage.getItem('userID')) {
             window.location.href = localStorage.getItem('last_path');
         }
-        //
+
         const stepButtons = document.querySelectorAll('.step-button');
         const progress = document.querySelector('#progress');
 

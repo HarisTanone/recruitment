@@ -71,3 +71,10 @@ Route::get('/admin/contact-us/{id}', 'ContactUsController@show');
 Route::delete('/admin/contact-us/{id}', 'ContactUsController@destroy');
 Route::post('/admin/contact-us/send-email', 'ContactUsController@sendEmail');
 
+// cek kandidat berdasarkan id
+Route::get('/admin/cek_Kandidat/{id}', 'JobController@cekKandidat');
+// viewlistKandidat
+Route::get('/admin/viewlistKandidat/{id}', 'JobController@viewlistKandidat');
+Route::post('/admin/updateProgress/{kandidatID}/{jobID}', 'JobController@updateProgress');
+Route::get('/admin/exportToExcel/{jobID}', 'JobController@downloadExcel');
+

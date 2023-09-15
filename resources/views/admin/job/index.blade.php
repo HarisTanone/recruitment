@@ -139,7 +139,9 @@
                     mySelect2.append($('<option>').text(value.nama).attr('value', value.nilai));
                 });
                 mySelect2.attr('data-placeholder', 'Jurusan');
-                mySelect2.select2({ dropdownParent: "#exampleModal" });
+                mySelect2.select2({
+                    dropdownParent: "#exampleModal"
+                });
             });
 
             var itemsPerPage = 6; // Set the number of items per page
@@ -165,15 +167,15 @@
                                     <h4 class="card-title">${job.jobtitle}</h4>
                                     <p class="card-text">${job.jobdeskripsion.substring(0, 60)}</p>
                                     ${JData !== null ? `
-                                        <span class="small text-bold text-muted">Requirements</span>
-                                        <p>
-                                            <span class="badge bg-secondary">${JData.last_pendidikan}</span>
-                                            <span class="badge bg-secondary">${JData.gender}</span>
-                                            <span class="badge bg-secondary">${JData.umur} Tahun</span>
-                                            <span class="badge bg-secondary">IPK ${JData.ipk}</span>
-                                            <span class="badge bg-secondary">${JData.jurusan}</span>
-                                            <span class="badge bg-secondary">Pengalaman ${JData.min_pengalaman} Tahun</span>
-                                        </p>` : ''}
+                                                        <span class="small text-bold text-muted">Requirements</span>
+                                                        <p>
+                                                            <span class="badge bg-secondary">${JData.last_pendidikan}</span>
+                                                            <span class="badge bg-secondary">${JData.gender}</span>
+                                                            <span class="badge bg-secondary">${JData.umur} Tahun</span>
+                                                            <span class="badge bg-secondary">IPK ${JData.ipk}</span>
+                                                            <span class="badge bg-secondary">${JData.jurusan}</span>
+                                                            <span class="badge bg-secondary">Pengalaman ${JData.min_pengalaman} Tahun</span>
+                                                        </p>` : ''}
                                 </div>
                                 <div class="card-footer text-lg-right">
                                     <button class="btn btn-danger btn-sm delete-job" data-job-id="${job.jobID}">
@@ -181,6 +183,9 @@
                                     </button>
                                     <button class="btn btn-warning btn-sm update-job" data-job-id="${job.jobID}">
                                         update
+                                    </button>
+                                    <button class="btn btn-primary btn-sm view-kandidat" data-job-id="${job.jobID}">
+                                        View
                                     </button>
                                 </div>
                             </div>
@@ -394,16 +399,14 @@
             });
         });
     </script>
-    {{-- <script>
-        let editor;
-
-        ClassicEditor
-            .create(document.querySelector('#jobrecuire'))
-            .then(newEditor => {
-                editor = newEditor;
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.view-kandidat', function(e) {
+                e.preventDefault();
+                var jobId = $(this).data('job-id');
+                var url_tujuan = "/admin/viewlistKandidat/" + jobId;
+                window.open(url_tujuan, "_blank");
             })
-            .catch(error => {
-                console.error(error);
-            });
-    </script> --}}
+        });
+    </script>
 @endsection

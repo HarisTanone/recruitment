@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\JobEmail;
+use Excel;
+use App\Exports\exportJobExcel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class JobController extends Controller
@@ -38,7 +42,7 @@ class JobController extends Controller
             "umur" => $request->umur,
             "ipk" => $request->ipk,
             "min_pengalaman" => $request->min_pengalaman,
-            "jurusan" => $request->jurusan
+            "jurusan" => $request->jurusan,
         ]);
 
         $job = $validatedData;
@@ -107,14 +111,14 @@ class JobController extends Controller
                 "umur" => $request->umur,
                 "ipk" => $request->ipk,
                 "min_pengalaman" => $request->min_pengalaman,
-                "jurusan" => $request->jurusan
+                "jurusan" => $request->jurusan,
             ]);
             // Create an array with the fields to update
             $updateData = [
                 'jobtitle' => $validatedData['jobtitle'],
                 'jobspesialis' => $validatedData['jobspesialis'],
                 'jobdeskripsion' => $validatedData['jobdeskripsion'],
-                'jobRequirements' => $json
+                'jobRequirements' => $json,
             ];
 
             // Add jobImage if it exists in the validated data
@@ -138,4 +142,94 @@ class JobController extends Controller
         return response()->json($job);
     }
 
+    public function cekKandidat($jobID)
+    {
+        $applicants = DB::table('job_applicants_view')->where('jobID', $jobID)->get();
+        $jobs = DB::table('jobs')->where('jobID', $jobID)->first();
+        $jobRequirements = json_decode($jobs->jobRequirements, true); // Ubah JSON menjadi array asosiatif
+
+        $result = [];
+
+        foreach ($applicants as $applicant) {
+            $matchPercentage = $this->calculateMatchPercentage($applicant, $jobRequirements);
+            $result[] = [
+                'Kandidat_ID' => $applicant->id,
+                'nama' => $applicant->nama,
+                'progress' => $applicant->progress,
+                'Persentase_Kesesuaian' => number_format($matchPercentage, 2) . "%",
+            ];
+        }
+
+        return response()->json(['data' => $result]);
+    }
+
+    public function calculateMatchPercentage($comp, $jobRequirements)
+    {
+        $totalAttributes = 5; // Jumlah atribut yang akan dibandingkan (usia, kelamin, ipk, jurusan, lama_bekerja)
+        $matchingAttributes = 0; // Inisialisasi jumlah atribut yang sesuai
+
+        if ($comp->usia >= $jobRequirements['umur']) {
+            $matchingAttributes++;
+        }
+
+        if ($comp->kelamin === $jobRequirements['gender']) {
+            $matchingAttributes++;
+        }
+
+        if ($comp->ipk >= $jobRequirements['ipk']) {
+            $matchingAttributes++;
+        }
+
+        if ($comp->jurusan === $jobRequirements['jurusan']) {
+            $matchingAttributes++;
+        }
+
+        if ($comp->lama_bekerja >= $jobRequirements['min_pengalaman']) {
+            $matchingAttributes++;
+        }
+
+        // Hitung persentase kesesuaian
+        $matchPercentage = ($matchingAttributes / $totalAttributes) * 100;
+
+        return $matchPercentage;
+    }
+
+    public function viewlistKandidat($id)
+    {
+        return view('admin.job.kandidat_job');
+    }
+
+    public function updateProgress(Request $request, $kandidatID, $jobID)
+    {
+        try {
+            $request->validate([
+                'progress' => ['required', 'in:process,accept,decline'], // Hanya menerima nilai 'process', 'accept', atau 'decline'
+            ]);
+
+            DB::table('job_applications')
+                ->where('kandidat_id', (int) $kandidatID)
+                ->where('job_id', (int) $jobID)
+                ->update(['progress' => $request->input('progress')]);
+
+            $usr = DB::table('kandidat')->where('id', (int) $kandidatID)->first();
+            $jobData = [
+                'nama' => $usr->nama,
+                'message' => 'Your Application Job Has Been ' . ucwords($request->input('progress')) . 'ed',
+                'subject' => 'Progress Job Application',
+            ];
+
+            Mail::to($usr->email)->send(new JobEmail($jobData));
+            return response()->json(['success' => true, 'message' => 'Progress berhasil diperbarui']);
+
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Terjadi kesalahan saat mengupdate progress'], 500);
+        }
+    }
+    public function downloadExcel($jobID)
+    {    // Ambil data yang ingin diekspor ke Excel
+        $applicants = DB::table('job_applicants_view')->where('jobID', $jobID)->get();
+
+        // Buat file Excel baru
+        return Excel::download(new exportJobExcel($applicants), 'Kandidat_Applied.xlsx');
+    }
 }

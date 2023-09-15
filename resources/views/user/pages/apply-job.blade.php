@@ -28,9 +28,28 @@
                 <div class="col-md-6 pt-2 pb-2" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="200">
                     <h5>Job Description</h5>
                     <p>{!! $data->jobdeskripsion !!}</p>
-                    <h5 class="mt-4">Job Requirements</h5>
                     <p>{!! $data->jobrecuire !!}</p>
-                    <p class="float-end">
+                    {{--  --}}
+                    @if ($data->jobRequirements)
+                        <h5 class="mt-4">Job Requirements</h5>
+                        @foreach (json_decode($data->jobRequirements, true) as $key => $value)
+                            @if (in_array($key, ['jurusan', 'gender', 'last_pendidikan', 'min_pengalaman', 'umur']))
+                                @if ($key === 'umur')
+                                    <span class="badge bg-primary">{{ $value }} Tahun</span>
+                                @elseif($key === 'min_pengalaman')
+                                    @if ($value == 0)
+                                        <span class="badge bg-primary">Freshgraduate</span>
+                                    @else
+                                        <span class="badge bg-primary">Pengalaman {{ $value }} Tahun</span>
+                                    @endif
+                                @else
+                                    <span class="badge bg-primary">{{ $value }}</span>
+                                @endif
+                            @endif
+                        @endforeach
+                    @endif
+                    {{--  --}}
+                    <p class="float-end pt-4 mt-4">
                         <button class="btn btn-primary" id="apply" data-id="{{ $data->jobID }}">Apply</button>
                     </p>
                 </div>
@@ -41,39 +60,36 @@
 @endsection
 @section('script')
     <script type="module">
-        // import {
-        //     savelocalStorageData
-        // } from "/js/helper.js";
         import * as helper from "/js/helper.js";
         $(document).ready(function() {
-            localStorage.setItem('last_path', window.location.pathname);
-            var local_personalInfo = localStorage.getItem('personalInformation')
-            var local_lastEducation = localStorage.getItem('lastEducation')
-            var local_workExperience = localStorage.getItem('workExperiences')
-
-            if (!local_personalInfo || !local_lastEducation || !local_workExperience) {
-                swal({
-                    title: "Oops...",
-                    text: "Anda Belum Melengkapi Data!",
-                    icon: "error",
-                    button: false,
-                    timer: 3000
-                });
-
-                setTimeout(() => {
-                    window.location.href = '/apply';
-                    localStorage.setItem('last_path', window.location.pathname);
-                }, 3000);
-            }
             $('#apply').click(function(e) {
                 e.preventDefault();
-                var data = {
-                    job_id: parseInt($(this).data('id')),
-                    kandidat_id: parseInt(localStorage.getItem('userID')),
-                    _token: $('#token').attr('content')
-                };
-                helper.jobApplication(data);
-                // savelocalStorageData(local_personalInfo, local_lastEducation, local_lastEducation)
+                localStorage.setItem('last_path', window.location.pathname);
+                var local_personalInfo = localStorage.getItem('personalInformation')
+                var local_lastEducation = localStorage.getItem('lastEducation')
+                var local_workExperience = localStorage.getItem('workExperiences')
+
+                if (!local_personalInfo || !local_lastEducation || !local_workExperience) {
+                    swal({
+                        title: "Oops...",
+                        text: "Anda Belum Melengkapi Data!",
+                        icon: "error",
+                        button: false,
+                        timer: 3000
+                    });
+
+                    setTimeout(() => {
+                        window.location.href = '/apply';
+                        localStorage.setItem('last_path', window.location.pathname);
+                    }, 3000);
+                } else {
+                    var data = {
+                        job_id: parseInt($(this).data('id')),
+                        kandidat_id: parseInt(localStorage.getItem('userID')),
+                        _token: $('#token').attr('content')
+                    };
+                    helper.jobApplication(data);
+                }
             });
         });
     </script>
