@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\JobEmail;
+use App\Mail\BestJob;
 use Excel;
 use App\Exports\exportJobExcel;
 use Illuminate\Http\Request;
@@ -146,7 +147,7 @@ class JobController extends Controller
     {
         $applicants = DB::table('job_applicants_view')->where('jobID', $jobID)->get();
         $jobs = DB::table('jobs')->where('jobID', $jobID)->first();
-        $jobRequirements = json_decode($jobs->jobRequirements, true); // Ubah JSON menjadi array asosiatif
+        $jobRequirements = json_decode($jobs->jobRequirements, true);
 
         $result = [];
 
@@ -231,5 +232,65 @@ class JobController extends Controller
 
         // Buat file Excel baru
         return Excel::download(new exportJobExcel($applicants), 'Kandidat_Applied.xlsx');
+    }
+
+    public function cariJobTerbaik($applicantID)
+    {
+        $applicant = DB::table('job_applicants_view')->where('id', $applicantID)->first();
+        $applicantsJobRequirements = [
+            'umur' => $applicant->usia,
+            'gender' => $applicant->kelamin,
+            'ipk' => $applicant->ipk,
+            'jurusan' => $applicant->jurusan,
+            'min_pengalaman' => $applicant->lama_bekerja,
+        ];
+
+        $jobs = DB::table('jobs')->get();
+        $bestJob = null;
+        $bestMatchPercentage = 0;
+
+        foreach ($jobs as $job) {
+            $jobRequirements = json_decode($job->jobRequirements, true);
+            $matchPercentage = $this->calculateMatchPercentageByJob($applicantsJobRequirements, $jobRequirements);
+
+            if ($matchPercentage > $bestMatchPercentage) {
+                $bestMatchPercentage = $matchPercentage;
+                $bestJob = $job;
+            }
+        }
+        Mail::to($applicant->email)->send(new BestJob($bestJob));
+        return response()->json(['success' => true, 'message' => 'Berhasil Mengirimkan Pekerjaan Yang Sesuai']);
+        // return response()->json(['best_job' => $bestJob, 'match_percentage' => number_format($bestMatchPercentage, 2) . '%']);
+    }
+
+    public function calculateMatchPercentageByJob($comp, $jobRequirements)
+    {
+        $totalAttributes = 5; // Jumlah atribut yang akan dibandingkan (usia, kelamin, ipk, jurusan, lama_bekerja)
+        $matchingAttributes = 0; // Inisialisasi jumlah atribut yang sesuai
+
+        if ($comp['umur'] >= $jobRequirements['umur']) {
+            $matchingAttributes++;
+        }
+
+        if ($comp['gender'] === $jobRequirements['gender']) {
+            $matchingAttributes++;
+        }
+
+        if ($comp['ipk'] >= $jobRequirements['ipk']) {
+            $matchingAttributes++;
+        }
+
+        if ($comp['jurusan'] === $jobRequirements['jurusan']) {
+            $matchingAttributes++;
+        }
+
+        if ($comp['min_pengalaman'] >= $jobRequirements['min_pengalaman']) {
+            $matchingAttributes++;
+        }
+
+        // Hitung persentase kesesuaian
+        $matchPercentage = ($matchingAttributes / $totalAttributes) * 100;
+
+        return $matchPercentage;
     }
 }

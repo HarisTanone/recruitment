@@ -37,7 +37,6 @@ Route::get('/getJurusan', 'landingController@getJurusan');
 Route::get('/apply', 'landingController@apply'); // Apply pages
 Route::get('/cek/{id}', 'landingController@cekIDCart'); // Apply pages
 
-
 Route::post('/insert-kandidat', 'KandidatController@insertKandidat');
 Route::get('/cek-kandidat/{id}', 'KandidatController@checkIdCart');
 Route::post('/insert-education', 'KandidatController@insertEducation');
@@ -77,4 +76,8 @@ Route::get('/admin/cek_Kandidat/{id}', 'JobController@cekKandidat');
 Route::get('/admin/viewlistKandidat/{id}', 'JobController@viewlistKandidat');
 Route::post('/admin/updateProgress/{kandidatID}/{jobID}', 'JobController@updateProgress');
 Route::get('/admin/exportToExcel/{jobID}', 'JobController@downloadExcel');
+Route::get('/admin/bestjob/{id}', 'JobController@cariJobTerbaik');
+
+Route::get('/admin/kandidat', 'listKandidat@index');
+Route::get('/admin/exportxlx', 'listKandidat@exportxlx');
 

@@ -6,22 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class JobEmail extends Mailable
+class BestJob extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $jobData;
+    public $bestJob;
 
-    public function __construct($jobData)
+    public function __construct($bestJob)
     {
-        $this->jobData = $jobData;
+        $this->bestJob = $bestJob;
     }
 
     public function build()
     {
-        $subject = 'test123';
+        $subject = 'Informasi Pekerjaan Terbaik';
 
         return $this->from('testadmin@gmail.com', 'Admin Talent Finder')->subject($subject)
-        ->view('emails.job_plain');
+        ->view('emails.bestJob');
     }
 }

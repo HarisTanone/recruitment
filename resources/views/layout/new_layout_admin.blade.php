@@ -23,6 +23,7 @@
         href="{{ url('admin_new/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ url('admin_new/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ url('admin_new/css/select2-bootstrap.css') }}">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <style>
         .select2-container .select2-selection--single {
             height: 38px !important;
@@ -102,7 +103,7 @@
                             </a>
                         </li>
                         <?php
-                        $activeUrls = ['admin/job', 'admin/faq', 'admin/contact-us'];
+                        $activeUrls = ['admin/job', 'admin/faq', 'admin/contact-us', 'admin/kandidat'];
                         ?>
                         <li class="nav-item {{ in_array(Request::path(), $activeUrls) ? 'menu-open' : '' }}">
                             <a href="#!" class="nav-link">
@@ -128,6 +129,11 @@
                                         class="nav-link {{ in_array(Request::path(), $activeUrls) && Request::is('admin/contact-us') ? 'active bg-cyan' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Contact</p>
+                                    </a>
+                                    <a href="{{ url('admin/kandidat') }}"
+                                        class="nav-link {{ in_array(Request::path(), $activeUrls) && Request::is('admin/kandidat') ? 'active bg-cyan' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Kandidat</p>
                                     </a>
                                 </li>
                             </ul>

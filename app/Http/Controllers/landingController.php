@@ -105,13 +105,6 @@ class landingController extends Controller
                     'lama_bekerja' => $tahunLamaBekerja,
                 ]);
             }
-            // $jobId = 123;
-            // DB::table('job_applications')->insert([
-            //     'job_id' => $jobId,
-            //     'kandidat_id' => $kandidatId,
-            //     'application_date' => now(),
-            // ]);
-
             return response()->json(['message' => 'Data successfully saved', 'kandidat_id' => $kandidatId]);
         } else {
             return response()->json(['message' => 'ID already exists']);

@@ -86,7 +86,7 @@
                         "data": null,
                         "defaultContent": '<div class="btn-group" role="group" aria-label="Basic example">' +
                             '<button type="button" class="btn btn-sm btn-outline-primary progress-button">Progress</button>' +
-                            '<button type="button" class="btn btn-sm btn-outline-primary">Mail Job</button>' +
+                            '<button type="button" class="btn btn-sm btn-outline-primary mail-job">Mail Job</button>' +
                             '</div>'
                     },
                     {
@@ -124,6 +124,30 @@
                 });
             }
             get_datatable()
+            $('#datatable').on('click', '.mail-job', function() {
+                var rowData = table.row($(this).parents('tr')).data();
+                var kandidatID = rowData[0];
+                swal({
+                    title: "Loading...",
+                    text: "Please wait",
+                    icon: "info",
+                    buttons: false,
+                    closeOnClickOutside: false,
+                    closeOnEsc: false,
+                });
+                $.getJSON('/admin/bestjob/' + kandidatID,
+                    function(data, textStatus, jqXHR) {
+                        swal.close();
+                        swal({
+                            title: "Success",
+                            text: data.message,
+                            icon: "success",
+                            button: false,
+                            timer: 1350
+                        })
+                    }
+                );
+            })
             $('#datatable').on('click', '.progress-button', function() {
                 // Menyimpan data kandidat ID dan job ID
                 var rowData = table.row($(this).parents('tr')).data();
