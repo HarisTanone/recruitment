@@ -72,7 +72,7 @@
                 if (!local_personalInfo || !local_lastEducation || !local_workExperience) {
                     swal({
                         title: "Oops...",
-                        text: "Anda Belum Melengkapi Data!",
+                        text: "You Have Not Provided Complete Information.!",
                         icon: "error",
                         button: false,
                         timer: 3000

@@ -13145,4 +13145,11 @@ body {
   height: 7rem;
 }
 
+body a {
+  text-decoration: none;
+}
+
+body footer a:hover {
+  text-decoration: underline;
+}
 /*# sourceMappingURL=main.css.map */

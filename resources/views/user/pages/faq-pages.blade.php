@@ -8,7 +8,7 @@
                 <h1 class="mb-4 text-primary fw-bold">Frequently Asked Questions</h1>
                 <div class="col-md-4">
                     <div class="input-group input-group-lg">
-                        <input type="text" class="form-control shadow-2 border-2" id="searchInput"
+                        <input type="text" class="form-control shadow border-2" id="searchInput"
                             aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
                             placeholder="Search" />
                     </div>
@@ -29,11 +29,6 @@
                     <div class="col-md-12" id="viewFAQ">
                         {{-- data tampil sini --}}
                     </div>
-                    {{-- <div class="row justify-content-center">
-                        <div class="col-lg-2 pt-4">
-                            <a type="button" href="#!" class="btn btn-primary">Load More</a>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>

@@ -13,12 +13,12 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nama</th>
-                                <th>Usia</th>
-                                <th>Kelamin</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
                                 <th>IPK</th>
-                                <th>Jurusan</th>
-                                <th>Lama Bekerja</th>
+                                <th>Major</th>
+                                <th>Years of Experience</th>
                             </tr>
                         </thead>
                         <tbody>

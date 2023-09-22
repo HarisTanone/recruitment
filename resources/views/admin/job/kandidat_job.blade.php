@@ -1,6 +1,6 @@
 @extends('layout.new_layout_admin')
-@section('title', 'Kandidat Applied')
-@section('menu', 'Kandidat Applied')
+@section('title', 'Candidate Applied')
+@section('menu', 'Candidate Applied')
 @section('konten')
     <div class="row">
         <div class="col-12">
@@ -12,9 +12,9 @@
                     <table id="datatable" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Kandidat ID</th>
-                                <th>Nama</th>
-                                <th>Persentase Kesesuaian</th>
+                                <th>Candidate ID</th>
+                                <th>Name</th>
+                                <th>Conformity Percentage</th>
                                 <th>Progress</th>
                                 <th>Action</th>
                             </tr>
@@ -33,7 +33,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Progress Rekruitment</h5>
+                    <h5 class="modal-title">Progress Recruitment</h5>
                 </div>
                 <div class="modal-body">
                     <form id="update_progress">

@@ -12,7 +12,7 @@
                             <div class="small-box bg-info">
                                 <div class="inner">
                                     <h3>{{ $total_kandidat }}</h3>
-                                    <p>Total Kandidat</p>
+                                    <p>Total Candidates</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
@@ -27,7 +27,7 @@
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3>{{ $total_job }}</h3>
-                                    <p>Total Job</p>
+                                    <p>Total Jobs</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>

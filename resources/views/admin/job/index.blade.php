@@ -78,8 +78,8 @@
                                 <div class="co-lg-6 col-md-6 col-sm 6">
                                     <select class="form-control" name="gender" id="gender">
                                         <option value="">Gender</option>
-                                        <option value="pria">Pria</option>
-                                        <option value="wanita">Wanita</option>
+                                        <option value="pria">Male</option>
+                                        <option value="wanita">Female</option>
                                     </select>
                                 </div>
                                 <div class="co-lg-6 col-md-6 col-sm 6 pt-4">
@@ -92,7 +92,7 @@
                                 </div>
                                 <div class="co-lg-6 col-md-6 col-sm 6 pt-4">
                                     <select class="form-control" name="min_pengalaman" id="min_pengalaman">
-                                        <option value="">Lama Pengalaman</option>
+                                        <option value="">Years of Experience</option>
                                         <option value="0">Fresh Grad</option>
                                         <option value="1">1 Thn</option>
                                         <option value="2">2 Thn</option>

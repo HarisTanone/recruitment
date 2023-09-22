@@ -3,18 +3,25 @@
     <!-- section-1 // hero -->
     <div id="section" class="container-fluid custom-section">
         <div class="container pt-4 mt-5">
-            <div class="row text-center align-items-center">
-                <div class="col-md-4 col-lg-4">
-                    <img src="{{ asset('access_user/public/images/jonas-kakaroto-KIPqvvTOC1s-unsplash.png') }}"
-                        class="img-fluid d-none d-md-block" alt="..." data-aos="fade-in" />
-                </div>
-                <div class="col-md-4 col-lg-4" data-aos="fade-in">
-                    <h1 class="mb-4 text-primary fw-bold">JOB VACANCY</h1>
+            <div class="row d-flex">
+                <div class="col-lg-6 align-self-center">
+                    <h2 class="text-primary fw-bold">JOB VACANCY</h2>
+                    <p class="text-muted">
+                        Explore job opportunities that are suitable and aligned with you, discover job prospects tailored
+                        to your unique profile. Let us assist you in finding a career that matches your potential. Start
+                        exploring today!
+                    </p>
                     <form action="{{ route('search') }}#sectionJob" method="GET">
-                        <input class="form-control form-control-lg" type="text" name="query" placeholder="Search"
-                            aria-label="default input example" />
-                        <button type="submit" class="btn mt-2 mb-4 btn-primary">Search</button>
+                        <div class="input-group mb-3 shadow">
+                            <input type="text" class="form-control" name="query"
+                                placeholder="Job Search that Fits You">
+                            <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                        </div>
                     </form>
+                </div>
+                <div class="col-lg-6">
+                    <img src="{{ asset('access_user/public/images/01_undraw_job_hunt_re_q203.svg') }}"
+                        class="img-fluid d-none d-md-block" alt="..." data-aos="fade-in" />
                 </div>
             </div>
         </div>
@@ -28,8 +35,8 @@
         <div class="container pt-4 pb-4">
             <div class="row justify-content-center pb-4">
                 <div class="col-md-12 text-center border-bottom" data-aos="fade-in">
-                    <h2 class="fw-bold">Karir untuk Masa depan</h2>
-                    <p>Temukan Disini</p>
+                    <h2 class="fw-bold">Career for the Future</h2>
+                    <p>Find it here</p>
                 </div>
                 <div class="col-2 boreder-bottom"></div>
             </div>
@@ -103,13 +110,13 @@
         <div class="container pt-4 pb-4">
             <div class="row align-items-center">
                 <div class="col-md-5">
-                    <h2 class="fw-bold" data-aos="fade-in">Alasan Memilih Berkerja bersama TalentFinder</h2>
-                    <p data-aos="fade-in">Kami bertekad membangun iklim kerja yang aman dan memuaskan secara
-                        professional bagi karyawan kami.</p>
-                    <button type="button" class="btn btn-primary mb-5">Selengkapnya</button>
+                    <h2 class="fw-bold" data-aos="fade-in">Reasons for choosing to work with TalentFinder</h2>
+                    <p data-aos="fade-in">We are determined to build a safe and satisfying work climate professionalism for
+                        our employees.</p>
+                    <button type="button" class="btn btn-primary mb-5">More</button>
                 </div>
                 <div class="col-md-7 text-center" data-aos="fade-in">
-                    <img src="{{ asset('access_user/public/images/sec3.png') }}"
+                    <img src="{{ asset('access_user/public/images/02_undraw_career_progress_ivdb.png') }}"
                         class="img-fluid rounded mx-auto d-block mb-2" alt="" />
                 </div>
             </div>

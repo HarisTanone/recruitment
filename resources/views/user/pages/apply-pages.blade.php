@@ -130,20 +130,20 @@
                                             <div class="mb-3 col-lg-4 col-md-6 col-sm-12">
                                                 <select class="form-select" aria-label="Default select example"
                                                     id="agama" name="agama" required>
-                                                    <option value="">Agama</option>
+                                                    <option value="">Religion</option>
                                                     <option value="Islam">Islam</option>
-                                                    <option value="Kristen">Kristen</option>
-                                                    <option value="Katolik">Katolik</option>
-                                                    <option value="Hindu">Hindu</option>
-                                                    <option value="Buddha">Buddha</option>
+                                                    <option value="Christianity">Christianity</option>
+                                                    <option value="Catholicism">Catholicism</option>
+                                                    <option value="Hinduism">Hinduism</option>
+                                                    <option value="Buddhism">Buddhism</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-lg-4 col-md-6 col-sm-12">
                                                 <select class="form-select" aria-label="Default select example"
                                                     id="kelamin" name="kelamin" required>
                                                     <option value="">Gender</option>
-                                                    <option value="pria">Pria</option>
-                                                    <option value="wanita">Wanita</option>
+                                                    <option value="pria">Male</option>
+                                                    <option value="wanita">Female</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3 col-lg-6 col-md-6 col-sm-12">
@@ -155,11 +155,11 @@
                                                     name="phone_number" placeholder="Phone Number" required />
                                             </div>
                                             <div class="mb-3 col-lg-4 col-md-12 col-sm-12">
-                                                <textarea class="form-control" id="alamat" name="alamat" rows="2" placeholder="Alamat Domisili" required></textarea>
+                                                <textarea class="form-control" id="alamat" name="alamat" rows="2" placeholder="Residence address" required></textarea>
 
                                             </div>
                                             <div class="mb-3 col-lg-4 col-md-12 col-sm-12">
-                                                <textarea class="form-control" id="bahasa" name="bahasa" rows="2" placeholder="Bahasa"
+                                                <textarea class="form-control" id="bahasa" name="bahasa" rows="2" placeholder="Language"
                                                     data-bs-toggle="popover" data-bs-placement="bottom"
                                                     data-bs-content="Jika menguasai lebih dari 1 bahas maka dapat menggunakan koma ," required></textarea>
                                             </div>
@@ -172,9 +172,7 @@
                                         </div>
                                         <button type="submit" class="btn btn-secondary float-end">Next</button>
                                         <button type="button" class="btn btn-link float-end text-white"
-                                            id="cek_idcart">Sudah Pernah Melengkapi Data</button>
-                                        {{-- <button type="button" class="btn btn-secondary float-end">Sudah Pernah Melengkapi Data</button>
-                                        <button type="submit" class="btn btn-secondary float-end">Next</button> --}}
+                                            id="cek_idcart">Has completed data</button>
                                     </form>
                                 </div>
                             </div>
@@ -205,7 +203,7 @@
                                             </div>
                                             <div class="mb-3 col-lg-6 col-md-12 col-sm-12">
                                                 <input required type="text" class="form-control" id="universitas"
-                                                    name="universitas" placeholder="Universitas" />
+                                                    name="universitas" placeholder="university" />
                                             </div>
                                             <div class="mb-3 col-lg-6 col-md-12 col-sm-12">
                                                 <select class="form-select" id="jurusan" name="jurusan" required>
@@ -213,11 +211,11 @@
                                             </div>
                                             <div class="mb-3 col-lg-4 col-md-4 -col-sm-4">
                                                 <input required type="number" class="form-control" id="tahunMasuk"
-                                                    name="tahunMasuk" placeholder="Tahun Masuk" />
+                                                    name="tahunMasuk" placeholder="Start Year (2015)" />
                                             </div>
                                             <div class="mb-3 col-lg-4 col-md-4 -col-sm-4">
                                                 <input required type="number" class="form-control" id="tahunLulus"
-                                                    name="tahunLulus" placeholder="Tahun Lulus" />
+                                                    name="tahunLulus" placeholder="End Year (2019)" />
                                             </div>
                                             <div class="mb-3 col-lg-4 col-md-4 -col-sm-4">
                                                 <input required type="number" step="0.01" class="form-control"
@@ -247,11 +245,11 @@
                                         <div class="row">
                                             <div class="mb-3 col-lg-6 col-md-12 col-sm-12">
                                                 <input type="text" class="form-control" id="namaPerusahaan"
-                                                    name="namaPerusahaan" placeholder="Nama Perusahaan" />
+                                                    name="namaPerusahaan" placeholder="Company" />
                                             </div>
                                             <div class="mb-3 col-lg-6 col-md-12 col-sm-12">
                                                 <input type="text" class="form-control" id="jabatan" name="jabatan"
-                                                    placeholder="Jabatan" />
+                                                    placeholder="Position" />
                                             </div>
                                             <div class="mb-3 col-lg-5 col-md-12 col-sm-12">
                                                 <input type="date" class="form-control" id="tanggalMulai"
@@ -260,7 +258,7 @@
                                             <div class="align-self-center col-lg-2 mb-3 mr-3 text-center">
                                                 <input class="form-check-input" type="checkbox" id="saatIni"
                                                     name="saatIni" />
-                                                <label class="form-check-label text-white" for="saatIni"> Saat ini
+                                                <label class="form-check-label text-white" for="saatIni"> Currently
                                                 </label>
                                             </div>
                                             <div class="mb-3 col-lg-5 col-md-12 col-sm-12">
@@ -289,11 +287,11 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th scope="col">Nama Perusahaan</th>
-                                                    <th scope="col">Jabatan</th>
-                                                    <th scope="col">Tanggal Mulai</th>
+                                                    <th scope="col">Company</th>
+                                                    <th scope="col">Position</th>
+                                                    <th scope="col">Start Date</th>
                                                     {{-- <th scope="col">Saat Ini</th> --}}
-                                                    <th scope="col">Tanggal Selesai</th>
+                                                    <th scope="col">End Date</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
@@ -316,7 +314,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Cek Data</h5>
+                    <h5 class="modal-title">Check Data</h5>
                 </div>
                 <div class="modal-body">
                     <form id="form_cekid">

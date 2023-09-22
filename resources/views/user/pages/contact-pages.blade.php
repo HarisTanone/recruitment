@@ -2,17 +2,18 @@
 @section('content')
     <div class="container-fluid custom-section">
         <div class="custom-spacing"></div>
-        <div id="section" class="container" style="height: 75vh">
+        <div id="section" class="container">
             <div class="row justify-content-center text-center" data-aos="fade-up">
                 <div class="col-4">
                     <h1 class="mb-4 text-primary">CONTACT US</h1>
                 </div>
             </div>
             <div class="row justify-content-center text-center">
-                <div class="col-md-6" data-aos="fade-up" data-aos-duration="500">
+                <div class="col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-duration="500">
                     <h2 class="mb-4 text-primary">Address</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    </p>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.9986754350325!2d112.73760197383504!3d-7.240987371118271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7f91613e32197%3A0xb6a7be1a9dbdb844!2sJl.%20Waspada%20No.94-J%2C%20RT.002%2FRW.02%2C%20Bongkaran%2C%20Kec.%20Pabean%20Cantikan%2C%20Surabaya%2C%20Jawa%20Timur%2060161!5e0!3m2!1sid!2sid!4v1695283237401!5m2!1sid!2sid"
+                        width="500" height="200" class="shadow rounded-1"></iframe>
                 </div>
                 <div class="col-md-6 text-lg-end" data-aos="fade-up" data-aos-duration="500">
                     <div class="row">
@@ -30,8 +31,8 @@
                                     placeholder="Last Name" />
                             </div>
                             <div class="input-group mb-3">
-                                <input required id="email" name="email" type="text" class="form-control" placeholder="Email"
-                                    aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                                <input required id="email" name="email" type="text" class="form-control"
+                                    placeholder="Email" aria-label="Recipient's username" aria-describedby="basic-addon2" />
                             </div>
                             <div class="input-group">
                                 <textarea required id="message" name="message" class="form-control" aria-label="With textarea" placeholder="Mesagge"></textarea>

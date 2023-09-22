@@ -130,7 +130,7 @@
                                     <a href="{{ url('admin/kandidat') }}"
                                         class="nav-link {{ in_array(Request::path(), $activeUrls) && Request::is('admin/kandidat') ? 'active bg-cyan' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Kandidat</p>
+                                        <p>Candidates</p>
                                     </a>
                                 </li>
                             </ul>
