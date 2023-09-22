@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('access_user/assets/main.css') }}" />
+    <link rel="stylesheet" href="/access_user/assets/main.css" />
     <!-- Akhir Custom CSS -->
 
     <!-- Animation -->
@@ -18,8 +18,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('admin_new/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin_new/css/select2-bootstrap.css') }}">
+    <link rel="stylesheet" href="/admin_new/css/select2.min.css">
+    <link rel="stylesheet" href="/admin_new/css/select2-bootstrap.css">
     <meta name="csrf_token" content="{{ csrf_token() }}" id="token" />
     <style>
         .select2-container .select2-selection--single {
@@ -151,8 +151,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('admin_new/js/select2.min.js') }}"></script>
-    <script src="{{ asset('admin_new/assets/dist/js/sweetalert.min.js')}}"></script>
+    <script src="/admin_new/js/select2.min.js"></script>
+    <script src="/admin_new/assets/dist/js/sweetalert.min.js"></script>
     <script>
         AOS.init();
     </script>

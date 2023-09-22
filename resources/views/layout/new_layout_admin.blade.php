@@ -12,17 +12,14 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ url('admin_new/assets/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="/admin_new/assets/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ url('admin_new/assets/dist/css/adminlte.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ url('admin_new/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ url('admin_new/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ url('admin_new/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ url('admin_new/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ url('admin_new/css/select2-bootstrap.css') }}">
+    <link rel="stylesheet" href="/admin_new/assets/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/admin_new/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/admin_new/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/admin_new/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="/admin_new/css/select2.min.css">
+    <link rel="stylesheet" href="/admin_new/css/select2-bootstrap.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <style>
         .select2-container .select2-selection--single {
@@ -71,7 +68,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-light-primary bg-white elevation-3">
             <!-- Brand Logo -->
-            <a href="{{ url('/admin/dashboard') }}" class="brand-link">
+            <a href="/admin/dashboard" class="brand-link">
                 <span class="brand-text font-weight-bold h2">TalentFinder</small>
             </a>
 
@@ -94,7 +91,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{ url('admin/dashboard') }}"
+                            <a href="/admin/dashboard"
                                 class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
@@ -224,40 +221,40 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="{{ url('admin_new/assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="/admin_new/assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="{{ url('admin_new/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="/admin_new/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="{{ url('admin_new/assets/dist/js/adminlte.min.js') }}"></script>
+    <script src="/admin_new/assets/dist/js/adminlte.min.js"></script>
     <!-- FLOT CHARTS -->
-    <script src="{{ url('admin_new/assets/plugins/flot/jquery.flot.js') }}"></script>
+    <script src="/admin_new/assets/plugins/flot/jquery.flot.js"></script>
     <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-    <script src="{{ url('admin_new/assets/plugins/flot/plugins/jquery.flot.resize.js') }}"></script>
+    <script src="/admin_new/assets/plugins/flot/plugins/jquery.flot.resize.js"></script>
     <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
-    <script src="{{ url('admin_new/assets/plugins/flot/plugins/jquery.flot.pie.js') }}"></script>
+    <script src="/admin_new/assets/plugins/flot/plugins/jquery.flot.pie.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{ url('admin_new/assets/dist/js/demo.js') }}"></script>
-    <script src="{{ url('admin_new/assets/dist/js/sweetalert.min.js') }}"></script>
+    <script src="/admin_new/assets/dist/js/demo.js"></script>
+    <script src="/admin_new/assets/dist/js/sweetalert.min.js"></script>
     {{-- <script src="{{ url('admin_new/assets/dist/js/lg.js') }}"></script> --}}
-    <script src="{{ url('admin_new/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/dist/js/pages/dashboard3.js') }}"></script>
-    <script src="{{ url('admin_new/assets/plugins/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ url('admin_new/js/select2.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/dist/js/moment.min.js') }}"></script>
-    <script src="{{ url('admin_new/assets/dist/js/datetime.js') }}"></script>
-    <script src="{{ url('admin_new/assets/dist/js/ellipsis.js') }}"></script>
-    <script src="{{ url('admin_new/js/CKEDITOR.js') }}"></script>
+    <script src="/admin_new/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/admin_new/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/admin_new/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/admin_new/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/admin_new/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/admin_new/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="/admin_new/assets/plugins/jszip/jszip.min.js"></script>
+    <script src="/admin_new/assets/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="/admin_new/assets/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="/admin_new/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="/admin_new/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="/admin_new/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="/admin_new/assets/dist/js/pages/dashboard3.js"></script>
+    <script src="/admin_new/assets/plugins/chart.js/Chart.min.js"></script>
+    <script src="/admin_new/js/select2.min.js"></script>
+    <script src="/admin_new/assets/dist/js/moment.min.js"></script>
+    <script src="/admin_new/assets/dist/js/datetime.js"></script>
+    <script src="/admin_new/assets/dist/js/ellipsis.js"></script>
+    <script src="/admin_new/js/CKEDITOR.js"></script>
 
     <!-- Page specific script -->
     @yield('script')
